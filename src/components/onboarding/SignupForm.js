@@ -90,7 +90,7 @@ const Signup = (props) => {
                   setFormData={setFormData}
                 />
                 <PasswordField
-                  name='Confirm Password'
+                  name='Confirm password'
                   formData={formData}
                   setFormData={setFormData}
                 />

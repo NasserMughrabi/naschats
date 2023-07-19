@@ -47,7 +47,8 @@ export const PasswordField = forwardRef((props, ref) => {
           required
           {...props}
           onChange={(e) => {
-            if (name) {
+            // if setFormData is passed as prop then it's signing up which means we need to save to formData otherwise it's signin and we want to compare against database on click
+            if (name && setFormData) {
               if (name.toLowerCase() === "password") {
                 setFormData({ ...formData, password: e.target.value });
               } else {

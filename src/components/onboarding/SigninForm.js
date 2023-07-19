@@ -59,7 +59,9 @@ const Signin = () => {
                   <FormLabel htmlFor='email'>Email</FormLabel>
                   <Input id='email' type='email' />
                 </FormControl>
-                <PasswordField />
+                <PasswordField
+                  name='Password'
+                />
               </Stack>
               <HStack justify='space-between'>
                 <Checkbox defaultChecked colorScheme='teal'>
@@ -78,7 +80,6 @@ const Signin = () => {
                   </Text>
                   <Divider />
                 </HStack>
-                {/* <OAuthButtonGroup /> */}
                 <Button
                   bg='white'
                   w={"full"}
