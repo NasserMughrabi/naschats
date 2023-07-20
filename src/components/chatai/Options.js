@@ -23,6 +23,7 @@ const Options = () => {
       spacing={4}
       align='stretch'
       padding={2}
+      overflow='hidden'
     >
       <Tooltip label='Enter Youtube video URL and chat with it!'>
         <Button
