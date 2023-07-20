@@ -103,9 +103,7 @@ const Signin = () => {
       });
   };
 
-  const handleGoogleSignin = () => {
-    
-  }
+  const handleGoogleSignin = () => {};
 
   return (
     <Flex justifyContent='center' alignItems='center' height='100%'>
@@ -184,7 +182,7 @@ const Signin = () => {
                   maxW={"md"}
                   variant={"outline"}
                   leftIcon={<FcGoogle />}
-                  onClick={handlGoogleSignin}
+                  onClick={handleGoogleSignin}
                 >
                   <Center>
                     <Text>Continue with Google</Text>
