@@ -6,6 +6,7 @@ import {
   InputGroup,
   InputProps,
   InputRightElement,
+  color,
   useDisclosure,
   useMergeRefs,
 } from "@chakra-ui/react";
@@ -35,6 +36,7 @@ export const PasswordField = forwardRef((props, ref) => {
             variant='text'
             aria-label={isOpen ? "Mask password" : "Reveal password"}
             icon={isOpen ? <HiEye /> : <HiEyeOff />}
+            color={"teal.600"}
             onClick={onClickReveal}
           />
         </InputRightElement>
@@ -46,6 +48,11 @@ export const PasswordField = forwardRef((props, ref) => {
           autoComplete='current-password'
           required
           {...props}
+          _focus={{
+            border: "1px solid #319795",
+            zIndex: "1",
+            boxShadow: "rgb(49, 151, 149) 0px 0px 0px 1px",
+          }}
           onChange={(e) => {
             // if setFormData is passed as prop then it's signing up which means we need to save to formData otherwise it's signin and we want to compare against database on click
             if (name && setFormData) {

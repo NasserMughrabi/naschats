@@ -57,11 +57,17 @@ const Signin = () => {
               <Stack spacing='5'>
                 <FormControl>
                   <FormLabel htmlFor='email'>Email</FormLabel>
-                  <Input id='email' type='email' />
+                  <Input
+                    id='email'
+                    type='email'
+                    _focus={{
+                      border: "1px solid #319795",
+                      zIndex: "1",
+                      boxShadow: "rgb(49, 151, 149) 0px 0px 0px 1px",
+                    }}
+                  />
                 </FormControl>
-                <PasswordField
-                  name='Password'
-                />
+                <PasswordField name='Password' />
               </Stack>
               <HStack justify='space-between'>
                 <Checkbox defaultChecked colorScheme='teal'>

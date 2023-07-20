@@ -74,11 +74,16 @@ const Signup = (props) => {
           >
             <Stack spacing='6'>
               <Stack spacing='5'>
-                <FormControl>
+                <FormControl >
                   <FormLabel htmlFor='email'>Email</FormLabel>
                   <Input
                     id='email'
                     type='email'
+                    _focus={{
+                      border: "1px solid #319795",
+                      zIndex: "1",
+                      boxShadow: "rgb(49, 151, 149) 0px 0px 0px 1px",
+                    }}
                     onChange={(e) =>
                       setFormData({ ...formData, email: e.target.value })
                     }

@@ -60,6 +60,11 @@ const YourName = (props) => {
                   <Input
                     id='firstName'
                     type='text'
+                    _focus={{
+                      border: "1px solid #319795",
+                      zIndex: "1",
+                      boxShadow: "rgb(49, 151, 149) 0px 0px 0px 1px",
+                    }}
                     onChange={(e) =>
                       setFormData({ ...formData, firstName: e.target.value })
                     }
@@ -70,6 +75,11 @@ const YourName = (props) => {
                   <Input
                     id='lastName'
                     type='text'
+                    _focus={{
+                      border: "1px solid #319795",
+                      zIndex: "1",
+                      boxShadow: "rgb(49, 151, 149) 0px 0px 0px 1px",
+                    }}
                     onChange={(e) =>
                       setFormData({ ...formData, lastName: e.target.value })
                     }
@@ -80,11 +90,7 @@ const YourName = (props) => {
                 <Button colorScheme='teal' flex={1} onClick={() => setStep(0)}>
                   Back
                 </Button>
-                <Button
-                  colorScheme='teal'
-                  flex={1}
-                  onClick={handleCreate}
-                >
+                <Button colorScheme='teal' flex={1} onClick={handleCreate}>
                   Create
                 </Button>
               </HStack>
