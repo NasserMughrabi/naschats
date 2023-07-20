@@ -14,7 +14,7 @@ import { forwardRef, useRef } from "react";
 import { HiEye, HiEyeOff } from "react-icons/hi";
 
 export const PasswordField = forwardRef((props, ref) => {
-  const { name, formData, setFormData } = props;
+  const { name, formData, setFormData, isSignup, setPassword } = props;
 
   const { isOpen, onToggle } = useDisclosure();
   const inputRef = useRef(null);
@@ -26,6 +26,15 @@ export const PasswordField = forwardRef((props, ref) => {
       inputRef.current.focus({ preventScroll: true });
     }
   };
+
+  let passwordVal;
+  if (isSignup) {
+    if (name.toLowerCase() === "password") {
+      passwordVal = formData.password;
+    } else {
+      passwordVal = formData.confirmPassword;
+    }
+  }
 
   return (
     <FormControl>
@@ -41,9 +50,10 @@ export const PasswordField = forwardRef((props, ref) => {
           />
         </InputRightElement>
         <Input
-          id='password'
+          id={name}
+          value={passwordVal}
           ref={mergeRef}
-          name='password'
+          name={name}
           type={isOpen ? "text" : "password"}
           autoComplete='current-password'
           required
@@ -55,12 +65,14 @@ export const PasswordField = forwardRef((props, ref) => {
           }}
           onChange={(e) => {
             // if setFormData is passed as prop then it's signing up which means we need to save to formData otherwise it's signin and we want to compare against database on click
-            if (name && setFormData) {
+            if (isSignup) {
               if (name.toLowerCase() === "password") {
                 setFormData({ ...formData, password: e.target.value });
               } else {
                 setFormData({ ...formData, confirmPassword: e.target.value });
               }
+            } else {
+              setPassword(e.target.value);
             }
           }}
         />

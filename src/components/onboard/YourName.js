@@ -20,13 +20,39 @@ import {
 } from "@chakra-ui/react";
 import { FcGoogle } from "react-icons/fc";
 import router from "next/router";
+import { useToast } from "@chakra-ui/react";
 
 const YourName = (props) => {
   const { formData, setFormData, step, setStep } = props;
+  const toast = useToast();
 
   const handleCreate = () => {
-    
-    router.push("/");
+    if (formData.firstName === "" || formData.lastName === "") {
+      toast({
+        title: "Attention",
+        description: "First Name and Last Name cannot be empty!",
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+        position: "top",
+      });
+      return;
+    }
+
+    fetch("/api/auth/register", {
+      method: "POST",
+      body: JSON.stringify(formData),
+    })
+      .then((response) => response.json())
+      // .then((data) => {
+      //   setUid(data.uid);
+      // })
+      .then(() => {
+        router.push("/chat");
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
   }
 
   return (
@@ -59,6 +85,7 @@ const YourName = (props) => {
                   <FormLabel htmlFor='firstName'>First Name</FormLabel>
                   <Input
                     id='firstName'
+                    value={formData.firstName}
                     type='text'
                     _focus={{
                       border: "1px solid #319795",
@@ -74,6 +101,7 @@ const YourName = (props) => {
                   <FormLabel htmlFor='lastName'>Last Name</FormLabel>
                   <Input
                     id='lastName'
+                    value={formData.lastName}
                     type='text'
                     _focus={{
                       border: "1px solid #319795",

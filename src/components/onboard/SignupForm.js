@@ -27,7 +27,56 @@ const Signup = (props) => {
 
   const toast = useToast();
 
+  const isValidEmail = (email) => {
+    // should be a valid email with @ and .
+    const regexp =
+      /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return regexp.test(email.toLowerCase());
+  };
+
+  const isValidPassword = (password) => {
+    // should be at least 6 characters long
+    return password.length >= 6;
+  };
+
   const handleSignup = (e) => {
+    if (
+      formData.email === "" ||
+      formData.password === ""
+    ) {
+      toast({
+        title: "Attention",
+        description: "Email and password cannot be empty!",
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+        position: "top",
+      });
+      return;
+    }
+    if (!isValidEmail(formData.email)) {
+      toast({
+        title: "Attention",
+        description: "Your email is not valid!",
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+        position: "top",
+      });
+      return;
+    }
+    if (!isValidPassword(formData.password)) {
+      toast({
+        title: "Attention",
+        description: "Your password should be at least 6 characters long!",
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+        position: "top",
+      });
+      return;
+    }
+
     if (formData.confirmPassword != formData.password) {
       toast({
         title: "Attention",
@@ -38,9 +87,9 @@ const Signup = (props) => {
         position:"top",
       });
       return;
-    } else {
-      setStep(1)
     }
+
+    setStep(1);
   }
 
   return (
@@ -74,11 +123,12 @@ const Signup = (props) => {
           >
             <Stack spacing='6'>
               <Stack spacing='5'>
-                <FormControl >
+                <FormControl>
                   <FormLabel htmlFor='email'>Email</FormLabel>
                   <Input
                     id='email'
                     type='email'
+                    value={formData.email}
                     _focus={{
                       border: "1px solid #319795",
                       zIndex: "1",
@@ -93,11 +143,13 @@ const Signup = (props) => {
                   name='Password'
                   formData={formData}
                   setFormData={setFormData}
+                  isSignup={true}
                 />
                 <PasswordField
                   name='Confirm password'
                   formData={formData}
                   setFormData={setFormData}
+                  isSignup={true}
                 />
               </Stack>
               <HStack justify='space-between'>

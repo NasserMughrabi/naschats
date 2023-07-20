@@ -2,9 +2,9 @@ import {
   Grid,
   GridItem,
 } from '@chakra-ui/react'
-import SignupForm from "../components/onboarding/SignupForm"
-import YourName from "../components/onboarding/YourName"
-import LeftSide from "../components/onboarding/LeftSide"
+import SignupForm from "../components/onboard/SignupForm"
+import YourName from "../components/onboard/YourName"
+import LeftSide from "../components/onboard/LeftSide"
 import {useState} from "react"
 
 type FormData = {

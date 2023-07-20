@@ -1,18 +1,27 @@
-import {Grid, GridItem} from "@chakra-ui/react";
-import Options from "../components/chatai/Options"
-import Window from "../components/chatai/Window"
+import {
+  Grid,
+  GridItem
+} from '@chakra-ui/react'
+import SigninForm from "../components/onboard/SigninForm"
+import LeftSide from "../components/onboard/LeftSide"
+import { useEffect } from 'react';
+import router from "next/router";
 
-function nonLoginHome() {
+
+function Login() {
+  useEffect(() => {
+      router.push("/chat");
+    }, []);
   return (
-    <Grid h='100vh' templateRows='repeat(1, 1fr)' templateColumns='repeat(18, 1fr)'>
-      <GridItem rowSpan={1} colSpan={4} bg='teal.600'>
-        <Options />
+    <Grid h='100vh' templateRows='repeat(1, 1fr)' templateColumns='repeat(12, 1fr)' gap={1}>
+      <GridItem rowSpan={1} colSpan={6} bg='#01212E' display={{base: 'none', md:'block'}}>
+          <LeftSide />
       </GridItem>
-      <GridItem rowSpan={1} colSpan={14} bg='teal.500'>
-        <Window />
+      <GridItem rowSpan={1} colSpan={{base: 12, lg: 6}} bg='white'>
+        <SigninForm />
       </GridItem>
     </Grid>
   );
 }
 
-export default nonLoginHome;
+export default Login

@@ -23,6 +23,6 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/components/Logo.js", "src/components/OAuthButtonGroup.tsx", "src/components/onboarding/PasswordField.js"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/components/Logo.js", "src/components/OAuthButtonGroup.tsx", "src/components/onboard/PasswordField.js"],
   "exclude": ["node_modules"]
 }
