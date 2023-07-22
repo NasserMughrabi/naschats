@@ -35,7 +35,6 @@ export default async function handler(
   }
 
   try {
-    console.log(formData.firstName)
     await setDoc(doc(db, "users", user.uid), {
       email: formData.email,
       first_name: formData.firstName,

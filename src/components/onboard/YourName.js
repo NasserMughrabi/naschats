@@ -21,9 +21,11 @@ import {
 import { FcGoogle } from "react-icons/fc";
 import router from "next/router";
 import { useToast } from "@chakra-ui/react";
+import { UserAuth } from "@/context/AuthContext";
 
 const YourName = (props) => {
   const { formData, setFormData, step, setStep } = props;
+  const { googleSignIn } = UserAuth();
   const toast = useToast();
 
   const handleCreate = () => {
@@ -54,6 +56,15 @@ const YourName = (props) => {
         console.log(error.message);
       });
   }
+
+  const handleGoogleSignin = async () => {
+    try {
+      await googleSignIn();
+      router.push("/chat");
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <Flex justifyContent='center' alignItems='center' height='100%'>
@@ -137,6 +148,7 @@ const YourName = (props) => {
                   maxW={"md"}
                   variant={"outline"}
                   leftIcon={<FcGoogle />}
+                  onClick={handleGoogleSignin}
                 >
                   <Center>
                     <Text>Continue with Google</Text>

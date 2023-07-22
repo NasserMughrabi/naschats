@@ -23,11 +23,13 @@ import { FcGoogle } from "react-icons/fc";
 import { useState } from "react";
 import { useToast } from "@chakra-ui/react";
 import router from "next/router";
+import { UserAuth } from "@/context/AuthContext";
 
 const Signin = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const toast = useToast();
+  const { googleSignIn } = UserAuth();
 
   const isValidEmail = (email) => {
     // should be a valid email with @ and .
@@ -103,7 +105,14 @@ const Signin = () => {
       });
   };
 
-  const handleGoogleSignin = () => {};
+  const handleGoogleSignin = async () => {
+    try {
+      await googleSignIn();
+      router.push("/chat");
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <Flex justifyContent='center' alignItems='center' height='100%'>

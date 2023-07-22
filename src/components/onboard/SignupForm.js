@@ -21,9 +21,12 @@ import {
 import { PasswordField } from "./PasswordField";
 import { FcGoogle } from "react-icons/fc";
 import { useToast } from "@chakra-ui/react";
+import { UserAuth } from "@/context/AuthContext";
+import {router} from "next/router";
 
 const Signup = (props) => {
   const { formData, setFormData, step, setStep } = props;
+  const { googleSignIn } = UserAuth();
 
   const toast = useToast();
 
@@ -91,6 +94,15 @@ const Signup = (props) => {
 
     setStep(1);
   }
+
+  const handleGoogleSignin = async () => {
+    try {
+      await googleSignIn();
+      router.push("chat");
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <Flex justifyContent='center' alignItems='center' height='100%'>
@@ -178,6 +190,7 @@ const Signup = (props) => {
                   maxW={"md"}
                   variant={"outline"}
                   leftIcon={<FcGoogle />}
+                  onClick={handleGoogleSignin}
                 >
                   <Center>
                     <Text>Continue with Google</Text>

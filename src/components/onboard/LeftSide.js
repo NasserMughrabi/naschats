@@ -1,11 +1,11 @@
 /* eslint-disable react/no-unescaped-entities */
 import React from "react";
 import { Box, Heading, HStack, VStack, Image } from "@chakra-ui/react";
-import Logo from "../Logo"
+import Logo from "../main/Logo";
 
 const LeftSide = () => {
   return (
-    <Box paddingLeft='4rem' paddingRight="2rem">
+    <Box paddingLeft='4rem' paddingRight='2rem'>
       <Box h='20vh'>
         <Logo />
       </Box>
