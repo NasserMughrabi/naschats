@@ -1,6 +1,6 @@
 import { useContext, createContext, useState, useEffect } from "react";
 import {
-  signInWithPopup,
+  signInWithRedirect,
   signOut,
   onAuthStateChanged,
   GoogleAuthProvider,
@@ -19,7 +19,7 @@ export const AuthContextProvider = ({ children }) => {
     const provider = new GoogleAuthProvider();
     try {
       await setPersistence(auth, browserSessionPersistence);
-      const userCred = await signInWithPopup(auth, provider);
+      const userCred = await signInWithRedirect(auth, provider);
 
       fetch("/api/auth/google", {
         method: "POST",
