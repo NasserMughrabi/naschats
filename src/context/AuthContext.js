@@ -8,7 +8,6 @@ import {
   setPersistence,
 } from "firebase/auth";
 import { auth } from "../../firebaseConfig";
-import router from "next/router";
 
 const AuthContext = createContext();
 
