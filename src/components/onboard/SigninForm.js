@@ -108,7 +108,7 @@ const Signin = () => {
   const handleGoogleSignin = async () => {
     try {
       await googleSignIn();
-      // router.push("/chat");
+      router.push("/chat");
     } catch (error) {
       console.log(error);
     }
