@@ -27,7 +27,7 @@ import { useToast } from "@chakra-ui/react";
 import router from "next/router";
 import { UserAuth } from "@/context/AuthContext";
 import { useEffect } from "react";
-import { getAuth, getRedirectResult, GoogleAuthProvider } from "firebase/auth";
+import { getRedirectResult, GoogleAuthProvider } from "firebase/auth";
 import { auth } from "../../../firebaseConfig";
 
 const Signin = () => {
