@@ -35,7 +35,6 @@ export const AuthContextProvider = ({ children }) => {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
-      router.push("/chat");
     });
     return () => unsubscribe();
   }, [user]);
