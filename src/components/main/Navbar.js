@@ -94,7 +94,7 @@ const Navbar = () => {
           </Button>
           <Button
             as={"a"}
-            display={{ base: "none", md: "inline-flex" }}
+            display={{ base: "inline-flex" }}
             fontSize={"sm"}
             fontWeight={600}
             color={"white"}

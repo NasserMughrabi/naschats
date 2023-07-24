@@ -17,6 +17,8 @@ import {
   Stack,
   Text,
   Flex,
+  SkeletonText,
+  SkeletonCircle,
 } from "@chakra-ui/react";
 import { PasswordField } from "./PasswordField";
 import { FcGoogle } from "react-icons/fc";
@@ -24,12 +26,15 @@ import { useState } from "react";
 import { useToast } from "@chakra-ui/react";
 import router from "next/router";
 import { UserAuth } from "@/context/AuthContext";
+import { useEffect } from "react";
+import { getAuth, getRedirectResult, GoogleAuthProvider } from "firebase/auth";
+import { auth } from "../../../firebaseConfig";
 
 const Signin = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const toast = useToast();
-  const { googleSignIn } = UserAuth();
+  const { user, googleSignIn } = UserAuth();
 
   const isValidEmail = (email) => {
     // should be a valid email with @ and .
@@ -108,11 +113,32 @@ const Signin = () => {
   const handleGoogleSignin = async () => {
     try {
       await googleSignIn();
-      router.push("/chat");
     } catch (error) {
       console.log(error);
     }
   };
+
+  useEffect(() => {
+    // const auth = getAuth();
+    getRedirectResult(auth).then(async (userCred) => {
+      if (!userCred) {
+        return;
+      }
+
+      fetch("/api/auth/google", {
+        method: "POST",
+        body: JSON.stringify(userCred.user),
+      })
+        .then((response) => {
+          if (response.ok) {
+            router.push("/chat");
+          }
+        })
+        .catch((error) => {
+          console.log("here", error.message);
+        });
+    });
+  }, []);
 
   return (
     <Flex justifyContent='center' alignItems='center' height='100%'>

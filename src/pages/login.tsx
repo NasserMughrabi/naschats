@@ -1,12 +1,11 @@
+"use client";
 import {
   Grid,
   GridItem
 } from '@chakra-ui/react'
 import SigninForm from "../components/onboard/SigninForm"
 import LeftSide from "../components/onboard/LeftSide"
-import logo from './logo.png'; // Tell webpack this JS file uses this image
 import { withPublic } from "../lib/hooks/route";
-
 
 function Login() {
   return (
