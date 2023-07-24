@@ -11,7 +11,6 @@ import { withPublic } from "../lib/hooks/route";
 type FormData = {
   email: string;
   password: string;
-  confirmPassword: string;
   firstName: string;
   lastName: string;
   status: string;
@@ -22,7 +21,6 @@ const Signup = () => {
   const [formData, setFormData] = useState<FormData>({
     email: "",
     password: "",
-    confirmPassword: "",
     firstName: "",
     lastName: "",
     status: "freemium",

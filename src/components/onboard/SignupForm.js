@@ -80,18 +80,6 @@ const Signup = (props) => {
       return;
     }
 
-    if (formData.confirmPassword != formData.password) {
-      toast({
-        title: "Attention",
-        description: "Passwords do not match!",
-        status: "error",
-        duration: 3000,
-        isClosable: true,
-        position:"top",
-      });
-      return;
-    }
-
     setStep(1);
   }
 
@@ -157,21 +145,7 @@ const Signup = (props) => {
                   setFormData={setFormData}
                   isSignup={true}
                 />
-                <PasswordField
-                  name='Confirm password'
-                  formData={formData}
-                  setFormData={setFormData}
-                  isSignup={true}
-                />
               </Stack>
-              <HStack justify='space-between'>
-                <Checkbox defaultChecked colorScheme='teal'>
-                  Remember me
-                </Checkbox>
-                <Button color='teal' variant='text' size='sm'>
-                  Forgot password?
-                </Button>
-              </HStack>
               <Stack spacing='6'>
                 <Button colorScheme='teal' onClick={handleSignup}>
                   Sign up

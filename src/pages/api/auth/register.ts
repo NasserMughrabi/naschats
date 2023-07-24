@@ -8,16 +8,6 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  try {
-    const check = JSON.parse(req.body);
-    // console.log(`DEBUG: in the register API:${req.body}`);
-    // console.log(`DEBUG: in the register API:${check}`)
-  } catch (e) {
-    return res.status(400).json({
-      error: "bad request since formData in undefined",
-      body: req.body
-    });
-  }
 
   const { createUserWithEmailAndPassword } = AuthService;
   const formData = JSON.parse(req.body);
