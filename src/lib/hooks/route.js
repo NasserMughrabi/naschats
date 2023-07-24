@@ -12,7 +12,6 @@ export function withProtected(Component) {
     const router = useRouter();
     useEffect(() => {
       if (auth.status === "pending") return;
-
       if (!auth.uid) {
         router.replace(
           {
@@ -43,9 +42,9 @@ export function withPublic(Component) {
       if (auth.uid) {
         router.replace(
           {
-            pathname: "/home"
+            pathname: "/chat"
           },
-          "/home"
+          "/chat"
         );
       }
     }, [auth.uid, auth.status, router]);

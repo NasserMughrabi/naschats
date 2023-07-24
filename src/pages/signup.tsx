@@ -6,6 +6,7 @@ import SignupForm from "../components/onboard/SignupForm"
 import YourName from "../components/onboard/YourName"
 import LeftSide from "../components/onboard/LeftSide"
 import {useState} from "react"
+import { withPublic } from "../lib/hooks/route";
 
 type FormData = {
   email: string;
@@ -63,4 +64,4 @@ const Signup = () => {
   );
 }
 
-export default Signup
+export default withPublic(Signup)

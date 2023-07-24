@@ -1,6 +1,7 @@
 import { useContext, createContext, useState, useEffect } from "react";
 import {
   signInWithRedirect,
+  signInWithPopup,
   signOut,
   onAuthStateChanged,
   GoogleAuthProvider,
@@ -8,6 +9,7 @@ import {
   setPersistence,
 } from "firebase/auth";
 import { auth } from "../../firebaseConfig";
+import { router } from "next/router";
 
 const AuthContext = createContext();
 
@@ -18,17 +20,7 @@ export const AuthContextProvider = ({ children }) => {
     const provider = new GoogleAuthProvider();
     try {
       await setPersistence(auth, browserSessionPersistence);
-      const userCred = await signInWithRedirect(auth, provider);
-
-      fetch("/api/auth/google", {
-        method: "POST",
-        body: JSON.stringify(userCred.user),
-      })
-        .then((response) => response.json())
-        .catch((error) => {
-          console.log("here", error.message);
-        });
-      
+      await signInWithRedirect(auth, provider);
     } catch (e) {
       return {
         error: e.message,
@@ -43,6 +35,7 @@ export const AuthContextProvider = ({ children }) => {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
+      router.push("/chat");
     });
     return () => unsubscribe();
   }, [user]);

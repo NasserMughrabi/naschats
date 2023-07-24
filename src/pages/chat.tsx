@@ -2,9 +2,10 @@ import {Box, Grid, GridItem, Spacer} from "@chakra-ui/react";
 import Options from "../components/chatai/Options"
 import Window from "../components/chatai/Window"
 import { withProtected } from "../lib/hooks/route";
-import Navbar from "../components/main/Navbar"
+import Navbar from "../components/main/Navbar";
 
 const Chat = () => {
+
   return (
     <Box>
       <Navbar />
