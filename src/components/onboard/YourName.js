@@ -45,17 +45,25 @@ const YourName = (props) => {
       method: "POST",
       body: JSON.stringify(formData),
     })
-      .then((response) => response.json())
-      // .then((data) => {
-      //   setUid(data.uid);
-      // })
-      .then(() => {
-        router.push("/chat");
+      .then((response) => {
+        if (response.ok) {
+          router.push("/chat");
+          return response.json();
+        }
+        toast({
+          title: "Attention",
+          description: "Email already exists, please login!",
+          status: "error",
+          duration: 3000,
+          isClosable: true,
+          position: "top",
+        });
+        throw new Error(message);
       })
-      .catch((error) => {
-        console.log(error.message);
+      .catch((e) => {
+        console.log(e);
       });
-  }
+    }
 
   const handleGoogleSignin = async () => {
     try {

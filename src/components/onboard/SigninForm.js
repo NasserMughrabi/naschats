@@ -196,7 +196,7 @@ const Signin = () => {
                 <Checkbox defaultChecked colorScheme='teal'>
                   Remember me
                 </Checkbox>
-                <Button color='teal' variant='text' size='sm'>
+                <Button color='teal' variant='text' size='sm' onClick={() => router.push("/forgotPassword")}>
                   Forgot password?
                 </Button>
               </HStack>
