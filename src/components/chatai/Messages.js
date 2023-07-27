@@ -54,8 +54,11 @@ const Messages = () => {
   // Scroll to the bottom whenever the messages state updates
    const messagesContainerRef = useRef();
    useEffect(() => {
-     messagesContainerRef.current.scrollTop =
-       messagesContainerRef.current.scrollHeight;
+     const container = messagesContainerRef.current;
+     container.scrollTo({
+       top: container.scrollHeight,
+       behavior: "smooth",
+     });
    }, [messages]);
 
   return (
