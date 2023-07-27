@@ -34,47 +34,44 @@ const Navbar = ({ openSide, setOpenSide }) => {
   };
 
   return (
+    <Flex
+      bg={useColorModeValue("#01212E", "#01212E")}
+      color={useColorModeValue("white", "white")}
+      py={{ base: 2 }}
+      px={{ base: 4 }}
+      borderBottom={1}
+      borderStyle={"solid"}
+      borderColor={useColorModeValue("gray.200", "gray.900")}
+      align={"center"}
+      h='100%'
+      gridRow='span 1'
+    >
       <Flex
-        bg={useColorModeValue("#01212E", "#01212E")}
-        color={useColorModeValue("white", "white")}
-        py={{ base: 2 }}
-        px={{ base: 4 }}
-        borderBottom={1}
-        borderStyle={"solid"}
-        borderColor={useColorModeValue("gray.200", "gray.900")}
-        align={"center"}
-        h='100%'
-        gridRow='span 1'
+        flex={{ base: 1, md: "auto" }}
+        ml={{ base: -2 }}
+        display={{ base: "flex", md: "none" }}
       >
-        <Flex
-          flex={{ base: 1, md: "auto" }}
-          ml={{ base: -2 }}
-          display={{ base: "flex", md: "none" }}
-        >
-          <IconButton
-            onClick={() => setOpenSide(!openSide)}
-            icon={
-              openSide ? (
-                <CloseIcon w={3} h={3} />
-              ) : (
-                <HamburgerIcon w={5} h={5} />
-              )
-            }
-            variant={"ghost"}
-            aria-label={"Toggle Navigation"}
-            color={"white"}
-          />
-        </Flex>
-        <Flex flex={{ base: 1 }} justify={{ base: "center", md: "start" }}>
-          <Flex cursor={"pointer"}>Youtuber AI</Flex>
-        </Flex>
-        <Stack
-          flex={{ base: 1, md: 0 }}
-          justify={"flex-end"}
-          direction={"row"}
-          spacing={6}
-        >
-          {/* <Button
+        <IconButton
+          onClick={() => setOpenSide(!openSide)}
+          icon={
+            openSide ? <CloseIcon w={3} h={3} /> : <HamburgerIcon w={5} h={5} />
+          }
+          _hover={{ bg: "pink.400" }}
+          variant={"ghost"}
+          aria-label={"Toggle Navigation"}
+          color={"white"}
+        />
+      </Flex>
+      <Flex flex={{ base: 1 }} justify={{ base: "center", md: "start" }}>
+        <Flex cursor={"pointer"}>Youtuber AI</Flex>
+      </Flex>
+      <Stack
+        flex={{ base: 1, md: 0 }}
+        justify={"flex-end"}
+        direction={"row"}
+        spacing={6}
+      >
+        {/* <Button
             as={"a"}
             display={{ base: "inline-flex" }}
             fontSize={"sm"}
@@ -89,25 +86,23 @@ const Navbar = ({ openSide, setOpenSide }) => {
             Clear Chat
           </Button> */}
 
-          <Button
-            as={"a"}
-            display={{ base: "inline-flex" }}
-            fontSize={"sm"}
-            fontWeight={600}
-            color={"white"}
-            bg={"pink.400"}
-            cursor={"pointer"}
-            _hover={{
-              bg: "pink.300",
-            }}
-            onClick={handleLogout}
-          >
-            Log out
-          </Button>
-        </Stack>
-      </Flex>
-
-      
+        <Button
+          as={"a"}
+          display={{ base: "inline-flex" }}
+          fontSize={"sm"}
+          fontWeight={600}
+          color={"white"}
+          bg={"pink.400"}
+          cursor={"pointer"}
+          _hover={{
+            bg: "pink.300",
+          }}
+          onClick={handleLogout}
+        >
+          Log out
+        </Button>
+      </Stack>
+    </Flex>
   );
 };
 
