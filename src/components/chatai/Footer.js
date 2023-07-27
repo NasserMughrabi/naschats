@@ -29,7 +29,7 @@ const Footer = () => {
   const handleSend = () => {};
 
   return (
-    <Flex paddingTop={'10px'} mt={"10"} alignItems='center'>
+    <Flex px={'15rem'} paddingTop={'0px'} mt={"10"} alignItems='center'>
       <Box
         overflow={"inherit"}
         position={"relative"}
