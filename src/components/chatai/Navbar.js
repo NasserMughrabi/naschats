@@ -34,17 +34,17 @@ const Navbar = ({ openSide, setOpenSide }) => {
   };
 
   return (
-    <Box>
       <Flex
         bg={useColorModeValue("#01212E", "#01212E")}
         color={useColorModeValue("white", "white")}
-        minH={"60px"}
         py={{ base: 2 }}
         px={{ base: 4 }}
         borderBottom={1}
         borderStyle={"solid"}
         borderColor={useColorModeValue("gray.200", "gray.900")}
         align={"center"}
+        h='100%'
+        gridRow='span 1'
       >
         <Flex
           flex={{ base: 1, md: "auto" }}
@@ -107,10 +107,7 @@ const Navbar = ({ openSide, setOpenSide }) => {
         </Stack>
       </Flex>
 
-      {/* <Collapse in={isOpen} animateOpacity>
-        <MobileNav />
-      </Collapse> */}
-    </Box>
+      
   );
 };
 
