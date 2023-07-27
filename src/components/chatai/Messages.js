@@ -51,15 +51,8 @@ const Messages = () => {
     },
   ]);
 
-  const AlwaysScrollToBottom = () => {
-    const elementRef = useRef();
-    useEffect(() => elementRef.current.scrollIntoView());
-    return <div ref={elementRef} />;
-  };
-
+  // Scroll to the bottom whenever the messages state updates
    const messagesContainerRef = useRef();
-
-   // Scroll to the bottom whenever the messages state updates
    useEffect(() => {
      messagesContainerRef.current.scrollTop =
        messagesContainerRef.current.scrollHeight;
@@ -113,7 +106,6 @@ const Messages = () => {
         </Flex>
       ))}
       <Box flex='1' />
-      {/* <AlwaysScrollToBottom /> */}
     </Flex>
   );
 };

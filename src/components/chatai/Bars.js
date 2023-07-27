@@ -47,7 +47,6 @@ const Bars = () => {
   return (
     <Box>
       <Navbar openSide={openSide} setOpenSide={setOpenSide} />
-      {/* <FullSidebar openSide={openSide} /> */}
       <Sidebar openSide={openSide} />
     </Box>
   );
@@ -68,7 +67,6 @@ const FullSidebar = ({ openSide }) => {
       w={{ base: "40%", md: "18rem" }}
       pos='fixed'
       h='full'
-      // {...rest}
       display={{ base: `${baseDisplay}`, md: `${mdDisplay}` }}
     >
       <Flex h='20' alignItems='center' mx='8' justifyContent='space-between'>
@@ -127,8 +125,6 @@ const NavItem = ({ icon, children, ...rest }) => {
 };
 
 const Navbar = ({ openSide, setOpenSide }) => {
-  //   const { isOpen, onToggle } = useDisclosure();
-
   const handleLogout = async () => {
     await fetch("/api/auth/logout");
     router.push("/login");
@@ -192,10 +188,6 @@ const Navbar = ({ openSide, setOpenSide }) => {
           </Button>
         </Stack>
       </Flex>
-
-      {/* <Collapse in={isOpen} animateOpacity>
-        <MobileNav />
-      </Collapse> */}
     </Box>
   );
 };

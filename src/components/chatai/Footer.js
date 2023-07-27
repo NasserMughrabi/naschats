@@ -39,8 +39,8 @@ const Footer = () => {
         w={"100%"}
       >
         <Flex
-          justifyContent='space-between' // Align the items in the center and push the button to the right
-          alignItems='center' // Vertically center the items
+          justifyContent='space-between' 
+          alignItems='center' 
           position={"absolute"}
           bottom={"0"}
           width={"100%"}
@@ -61,7 +61,7 @@ const Footer = () => {
             _focus={{
               border: "1px solid #01212E",
             }}
-            width='calc(100% - 60px)' // Adjust the width so the button stays on the right
+            width='calc(100% - 60px)' 
           />
           <Button
             color='white'
