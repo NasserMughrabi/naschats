@@ -90,7 +90,7 @@ const Messages = () => {
       ))}
       <Box flex='1' />
       <Footer />
-      {/* <AlwaysScrollToBottom /> */}
+      <AlwaysScrollToBottom />
     </Flex>
   );
 };
