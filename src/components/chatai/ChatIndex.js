@@ -16,6 +16,7 @@ const ChatIndex = () => {
       h='100vh'
       templateRows='repeat(12, 1fr)'
       templateColumns='repeat(12, 1fr)'
+      overflow={{base: "hidden", md: "auto"}}
     >
       <GridItem rowSpan={1} colSpan={12}>
         <Navbar openSide={openSide} setOpenSide={setOpenSide} />
