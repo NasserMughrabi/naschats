@@ -2,7 +2,7 @@ import React from "react";
 import { Box, Flex, Input, Button, Textarea } from "@chakra-ui/react";
 import { useEffect, useRef, useState } from "react";
 
-const Footer = () => {
+const Footer = ({handleSend, handleInputChange}) => {
   const [value, setValue] = useState("");
   const textareaRef = useRef(null);
   useEffect(() => {
@@ -13,6 +13,7 @@ const Footer = () => {
 
   const handleChange = (event) => {
     setValue(event.target.value);
+    handleInputChange(event);
   };
 
   // Change input height as text gets bigger
@@ -26,10 +27,10 @@ const Footer = () => {
     }
   }, [value]);
 
-  const handleSend = () => {};
+
 
   return (
-    <Flex px={"4"} paddingTop={'0px'} mt={"10"} alignItems='center'>
+    <Flex px={"4"} paddingTop={"0px"} mt={"10"} alignItems='center'>
       <Box
         overflow={"inherit"}
         position={"relative"}
@@ -39,8 +40,8 @@ const Footer = () => {
         w={"100%"}
       >
         <Flex
-          justifyContent='space-between' 
-          alignItems='center' 
+          justifyContent='space-between'
+          alignItems='center'
           position={"absolute"}
           bottom={"0"}
           width={"100%"}
@@ -48,7 +49,6 @@ const Footer = () => {
           <Textarea
             ref={textareaRef}
             value={value}
-            onChange={handleChange}
             bg='#01212E'
             placeholder='Type Something...'
             _placeholder={{ color: "white" }}
@@ -61,7 +61,15 @@ const Footer = () => {
             _focus={{
               border: "1px solid #01212E",
             }}
-            width='calc(100% - 60px)' 
+            width='calc(100% - 60px)'
+            onChange={handleChange}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                e.preventDefault();
+                handleSend();
+                setValue("");
+              }
+            }}
           />
           <Button
             color='white'
@@ -73,7 +81,10 @@ const Footer = () => {
             }}
             bg={"pink.400"}
             cursor={"pointer"}
-            onClick={handleSend}
+            onClick={(e) => {
+              handleSend();
+              setValue("");
+            }}
           >
             Send
           </Button>

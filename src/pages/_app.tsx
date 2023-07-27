@@ -2,6 +2,8 @@ import type { AppProps } from "next/app";
 import React from "react";
 import { ChakraProvider, CSSReset } from "@chakra-ui/react";
 import { AuthContextProvider } from "../context/AuthContext";
+import '../static/scrollbar.css'; 
+
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (

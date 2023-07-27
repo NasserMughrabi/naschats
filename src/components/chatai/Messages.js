@@ -8,48 +8,16 @@ import {
   Button,
   Input,
   Textarea,
+  Skeleton,
 } from "@chakra-ui/react";
 import Footer from "./Footer";
 
-const Messages = () => {
-  const [messages, setMessages] = useState([
-    { from: "computer", isUser: false, text: "Hi, My Name is HoneyChat" },
-    { from: "me", isUser: true, text: "Hey there" },
-    { from: "me", isUser: true, text: "Myself Ferin Patel" },
-    {
-      from: "computer",
-      isUser: false,
-      text: "Nice to meet you. You can send me message and i'll reply you with same message.",
-    },
-    { from: "me", isUser: true, text: "great thank you" },
-    { from: "me", isUser: true, text: "what is your name" },
-    {
-      from: "computer",
-      isUser: false,
-      text: "My name is Nas how can I help you today?",
-    },
-    {
-      from: "me",
-      isUser: true,
-      text: "Nice to meet you Nas, my name is fried",
-    },
-    { from: "me", isUser: true, text: "Can you help me make a great project?" },
-    {
-      from: "computer",
-      isUser: false,
-      text: "Ofcourse I can",
-    },
-    {
-      from: "computer",
-      isUser: false,
-      text: "What kind of project are you working on?",
-    },
-    {
-      from: "me",
-      isUser: true,
-      text: "I am building an AI product just like you",
-    },
-  ]);
+const Messages = ({messages, isLoading}) => {
+
+  // sort the messages by timestamp
+  const sortedMessages = messages.sort((a, b) => {
+    return a.timestamp - b.timestamp;
+  });
 
   // Scroll to the bottom whenever the messages state updates
    const messagesContainerRef = useRef();
@@ -59,7 +27,7 @@ const Messages = () => {
        top: container.scrollHeight,
        behavior: "smooth",
      });
-   }, [messages]);
+   }, [sortedMessages, isLoading]);
 
   return (
     <Flex
@@ -70,7 +38,7 @@ const Messages = () => {
       px={2}
       overflowY='scroll'
     >
-      {messages.map((message, index) => (
+      {sortedMessages.map((message, index) => (
         <Flex
           key={index}
           flexDir={"column"}
@@ -108,6 +76,11 @@ const Messages = () => {
           ></Text>
         </Flex>
       ))}
+      {isLoading && (
+        <Flex flexDir={"column"} m='2' maxW='70%'>
+          <Skeleton height='20px' mb='3' />
+        </Flex>
+      )}
       <Box flex='1' />
     </Flex>
   );
