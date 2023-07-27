@@ -57,8 +57,23 @@ const Messages = () => {
     return <div ref={elementRef} />;
   };
 
+   const messagesContainerRef = useRef();
+
+   // Scroll to the bottom whenever the messages state updates
+   useEffect(() => {
+     messagesContainerRef.current.scrollTop =
+       messagesContainerRef.current.scrollHeight;
+   }, [messages]);
+
   return (
-    <Flex flexDir={"column"} h='100%' w='100%' px={2} overflowY='scroll'>
+    <Flex
+      ref={messagesContainerRef}
+      flexDir={"column"}
+      h='100%'
+      w='100%'
+      px={2}
+      overflowY='scroll'
+    >
       {messages.map((message, index) => (
         <Flex
           key={index}
