@@ -21,9 +21,12 @@ const ChatIndex = () => {
         <Navbar openSide={openSide} setOpenSide={setOpenSide} />
       </GridItem>
       <GridItem rowSpan={11} colSpan={12} bg='#0f3c4c'>
-        <Flex h={{base: '78%', md:"100%"}} gridRow='span 11'>
+        <Flex h={{ base: "100%", md: "100%" }} gridRow='span 11'>
           <Sidebar openSide={openSide} />
-          <Messages />
+          <Flex flexDir={'column'} w={"100vw"}>
+            <Messages />
+            <Footer />
+          </Flex>
         </Flex>
       </GridItem>
     </Grid>

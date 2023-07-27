@@ -49,13 +49,13 @@ const Messages = () => {
   };
 
   return (
-    <Flex flexDir={"column"} h='100%' px={2} overflowY='scroll' w={"full"}>
+    <Flex flexDir={"column"} h='100%' w="100%" px={2} overflowY='scroll'>
       {messages.map((message, index) => (
         <Flex
           key={index}
           flexDir={"column"}
           m='2'
-          maxW={"70%"}
+          // maxW={"70%"}
           alignSelf={message.isUser ? "flex-end" : "flex-start"}
           mb={"3"}
           // mb={index === totalMessages - 1 ? "3" : "0"}
@@ -89,7 +89,7 @@ const Messages = () => {
         </Flex>
       ))}
       <Box flex='1' />
-      <Footer />
+      {/* <Footer /> */}
       <AlwaysScrollToBottom />
     </Flex>
   );
