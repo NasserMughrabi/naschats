@@ -17,13 +17,10 @@ const ChatIndex = () => {
       templateRows='repeat(12, 1fr)'
       templateColumns='repeat(12, 1fr)'
     >
-      <GridItem rowSpan={1} colSpan={12} bg='teal.600'>
-        <Navbar
-          openSide={openSide}
-          setOpenSide={setOpenSide}
-        />
+      <GridItem rowSpan={1} colSpan={12}>
+        <Navbar openSide={openSide} setOpenSide={setOpenSide} />
       </GridItem>
-      <GridItem rowSpan={11} colSpan={12} bg='teal.600'>
+      <GridItem rowSpan={11} colSpan={12} bg='#0f3c4c'>
         <Flex h='100%' gridRow='span 11'>
           <Sidebar openSide={openSide} />
           <Messages />

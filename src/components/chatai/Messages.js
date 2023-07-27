@@ -57,12 +57,14 @@ const Messages = () => {
           m='2'
           maxW={"70%"}
           alignSelf={message.isUser ? "flex-end" : "flex-start"}
+          mb={"3"}
+          // mb={index === totalMessages - 1 ? "3" : "0"}
         >
           <Text
             fontSize='xs'
             fontWeight='bold'
             textAlign={message.isUser ? "right" : "left"}
-            color={message.isUser ? "white" : "black"}
+            color={"white"}
           >
             {message.isUser ? "You" : "Nas"}
           </Text>
@@ -86,8 +88,9 @@ const Messages = () => {
           ></Text>
         </Flex>
       ))}
+      <Box flex='1' />
       <Footer />
-      <AlwaysScrollToBottom />
+      {/* <AlwaysScrollToBottom /> */}
     </Flex>
   );
 };

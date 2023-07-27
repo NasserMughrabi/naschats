@@ -29,7 +29,7 @@ const Footer = () => {
   const handleSend = () => {};
 
   return (
-    <Flex mt={"10"} alignItems='center'>
+    <Flex mt={{base: "10"}} alignItems='center'>
       <Box
         overflow={"inherit"}
         position={"relative"}
@@ -48,16 +48,17 @@ const Footer = () => {
             ref={textareaRef}
             value={value}
             onChange={handleChange}
-            bg='white'
+            bg='#01212E'
             placeholder='Type Something...'
-            _placeholder={{ color: "black" }}
+            _placeholder={{ color: "white" }}
+            color={"white"}
             minHeight={10}
             maxHeight={200}
             resize='none'
             border='none'
             borderRadius='none'
             _focus={{
-              border: "1px solid black",
+              border: "1px solid #01212E",
             }}
             width='calc(100% - 60px)' // Adjust the width so the button stays on the right
           />
@@ -67,7 +68,7 @@ const Footer = () => {
             _hover={{
               bg: "pink.400",
               color: "black",
-              border: "1px solid black",
+              border: "1px solid white",
             }}
             bg={"pink.400"}
             cursor={"pointer"}
