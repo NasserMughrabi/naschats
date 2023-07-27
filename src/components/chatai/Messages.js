@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Avatar, Flex, Text, Box } from "@chakra-ui/react";
+import { Avatar, Flex, Text, Box, VStack, Button, Input, Textarea} from "@chakra-ui/react";
+import Footer from "./Footer";
 
 const Messages = () => {
   const [messages, setMessages] = useState([
@@ -11,21 +12,33 @@ const Messages = () => {
       isUser: false,
       text: "Nice to meet you. You can send me message and i'll reply you with same message.",
     },
-    { from: "computer", isUser: false, text: "Hi, My Name is HoneyChat" },
-    { from: "me", isUser: true, text: "Hey there" },
-    { from: "me", isUser: true, text: "Myself Ferin Patel" },
+    { from: "me", isUser: true, text: "great thank you" },
+    { from: "me", isUser: true, text: "what is your name" },
     {
       from: "computer",
       isUser: false,
-      text: "Nice to meet you. You can send me message and i'll reply you with same message.",
+      text: "My name is Nas how can I help you today?",
     },
-    { from: "computer", isUser: false, text: "Hi, My Name is HoneyChat" },
-    { from: "me", isUser: true, text: "Hey there" },
-    { from: "me", isUser: true, text: "Myself Ferin Patel" },
+    {
+      from: "me",
+      isUser: true,
+      text: "Nice to meet you Nas, my name is fried",
+    },
+    { from: "me", isUser: true, text: "Can you help me make a great project?" },
     {
       from: "computer",
       isUser: false,
-      text: "Nice to meet you. You can send me message and i'll reply you with same message.",
+      text: "Ofcourse I can",
+    },
+    {
+      from: "computer",
+      isUser: false,
+      text: "What kind of project are you working on?",
+    },
+    {
+      from: "me",
+      isUser: true,
+      text: "I am building an AI product just like you",
     },
   ]);
 
@@ -36,7 +49,7 @@ const Messages = () => {
   };
 
   return (
-    <Flex flexDir={"column"} h='33rem' px={2} overflowY='scroll' w={"full"}>
+    <Flex flexDir={"column"} h='100%' px={2} overflowY='scroll' w={"full"}>
       {messages.map((message, index) => (
         <Flex
           key={index}
@@ -73,6 +86,7 @@ const Messages = () => {
           ></Text>
         </Flex>
       ))}
+      <Footer />
       <AlwaysScrollToBottom />
     </Flex>
   );

@@ -26,53 +26,57 @@ const Footer = () => {
     }
   }, [value]);
 
-  const handleSend = (e) => {
-    
-
-  }
+  const handleSend = () => {};
 
   return (
-    <Flex w='100%' mt='5' overflow={"inherit"} >
+    <Flex mt={"10"} alignItems='center'>
       <Box
         overflow={"inherit"}
         position={"relative"}
         width={"100vw"}
         bg={"lightgreen"}
+        mb={"5"}
       >
-        <Textarea
-          ref={textareaRef}
-          value={value}
-          onChange={handleChange}
-          bg='white'
-          placeholder='Type Something...'
-          _placeholder={{ color: "black" }}
-          minHeight={10}
-          maxHeight={200}
-          resize='none'
-          border='none'
-          borderRadius='none'
-          _focus={{
-            border: "1px solid black",
-          }}
+        <Flex
+          justifyContent='space-between' // Align the items in the center and push the button to the right
+          alignItems='center' // Vertically center the items
           position={"absolute"}
           bottom={"0"}
-          transition='height 0.3s ease-in-out'
-        />
+          width={"100%"}
+        >
+          <Textarea
+            ref={textareaRef}
+            value={value}
+            onChange={handleChange}
+            bg='white'
+            placeholder='Type Something...'
+            _placeholder={{ color: "black" }}
+            minHeight={10}
+            maxHeight={200}
+            resize='none'
+            border='none'
+            borderRadius='none'
+            _focus={{
+              border: "1px solid black",
+            }}
+            width='calc(100% - 60px)' // Adjust the width so the button stays on the right
+          />
+          <Button
+            color='white'
+            borderRadius='none'
+            _hover={{
+              bg: "pink.400",
+              color: "black",
+              border: "1px solid black",
+            }}
+            bg={"pink.400"}
+            cursor={"pointer"}
+            onClick={handleSend}
+          >
+            Send
+          </Button>
+        </Flex>
       </Box>
-
-      <Button
-        bg='black'
-        color='white'
-        borderRadius='none'
-        _hover={{
-          bg: "white",
-          color: "black",
-          border: "1px solid black",
-        }}
-        onClick={handleSend}
-      >
-        Send
-      </Button>
     </Flex>
   );
 };

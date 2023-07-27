@@ -27,7 +27,6 @@ import {router} from "next/router";
 const Signup = (props) => {
   const { formData, setFormData, step, setStep } = props;
   const { googleSignIn } = UserAuth();
-
   const toast = useToast();
 
   const isValidEmail = (email) => {

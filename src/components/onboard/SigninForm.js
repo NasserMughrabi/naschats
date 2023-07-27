@@ -19,6 +19,7 @@ import {
   Flex,
   SkeletonText,
   SkeletonCircle,
+  Spinner,
 } from "@chakra-ui/react";
 import { PasswordField } from "./PasswordField";
 import { FcGoogle } from "react-icons/fc";
@@ -35,6 +36,7 @@ const Signin = () => {
   const [password, setPassword] = useState("");
   const toast = useToast();
   const { user, googleSignIn } = UserAuth();
+  const [loading, setLoading] = useState(false);
 
   const isValidEmail = (email) => {
     // should be a valid email with @ and .
@@ -83,6 +85,7 @@ const Signin = () => {
       return;
     }
 
+    setLoading(true);
     fetch("/api/auth/login", {
       method: "POST",
       body: JSON.stringify({ email, password }),
@@ -103,6 +106,7 @@ const Signin = () => {
           isClosable: true,
           position: "top",
         });
+        setLoading(false);
         throw new Error(message);
       })
       .catch((e) => {
@@ -111,6 +115,7 @@ const Signin = () => {
   };
 
   const handleGoogleSignin = async () => {
+    setLoading(true);
     try {
       await googleSignIn();
     } catch (error) {
@@ -125,6 +130,8 @@ const Signin = () => {
         return;
       }
 
+      setLoading(true);
+
       fetch("/api/auth/google", {
         method: "POST",
         body: JSON.stringify(userCred.user),
@@ -133,12 +140,27 @@ const Signin = () => {
           if (response.ok) {
             router.push("/chat");
           }
+          setLoading(false);
         })
         .catch((error) => {
           console.log("here", error.message);
         });
     });
   }, []);
+
+  if (loading) {
+    return (
+      <Flex justifyContent='center' alignItems='center' height='100%'>
+          <Spinner
+            thickness='4px'
+            speed='0.65s'
+            emptyColor='gray.200'
+            color='blue.500'
+            size='xl'
+          />
+      </Flex>
+    );
+  }
 
   return (
     <Flex justifyContent='center' alignItems='center' height='100%'>

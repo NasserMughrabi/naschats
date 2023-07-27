@@ -17,16 +17,19 @@ import {
   Stack,
   Text,
   Flex,
+  Spinner
 } from "@chakra-ui/react";
 import { FcGoogle } from "react-icons/fc";
 import router from "next/router";
 import { useToast } from "@chakra-ui/react";
 import { UserAuth } from "@/context/AuthContext";
+import { useState } from "react";
 
 const YourName = (props) => {
   const { formData, setFormData, step, setStep } = props;
   const { googleSignIn } = UserAuth();
   const toast = useToast();
+  const [loading, setLoading] = useState(false);
 
   const handleCreate = () => {
     if (formData.firstName === "" || formData.lastName === "") {
@@ -41,6 +44,7 @@ const YourName = (props) => {
       return;
     }
 
+    setLoading(true);
     fetch("/api/auth/register", {
       method: "POST",
       body: JSON.stringify(formData),
@@ -58,6 +62,7 @@ const YourName = (props) => {
           isClosable: true,
           position: "top",
         });
+        setLoading(false);
         throw new Error(message);
       })
       .catch((e) => {
@@ -74,6 +79,20 @@ const YourName = (props) => {
     }
   };
 
+  if (loading) {
+    return (
+      <Flex justifyContent='center' alignItems='center' height='100%'>
+        <Spinner
+          thickness='4px'
+          speed='0.65s'
+          emptyColor='gray.200'
+          color='blue.500'
+          size='xl'
+        />
+      </Flex>
+    );
+  }
+
   return (
     <Flex justifyContent='center' alignItems='center' height='100%'>
       <Container
@@ -88,6 +107,12 @@ const YourName = (props) => {
           <Stack spacing='6'>
             <Stack spacing={{ base: "2", md: "3" }} textAlign='center'>
               <Heading fontSize={{ base: "2xl", md: "3xl" }}>Sign Up</Heading>
+              <Text color='grey'>
+                Have an account?{" "}
+                <Link color='teal' href='/login'>
+                  Sign in
+                </Link>
+              </Text>
             </Stack>
           </Stack>
           <Box
