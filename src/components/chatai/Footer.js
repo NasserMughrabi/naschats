@@ -29,12 +29,13 @@ const Footer = () => {
   const handleSend = () => {};
 
   return (
-    <Flex  alignItems='center'>
+    <Flex mt={"10"} alignItems='center'>
       <Box
         overflow={"inherit"}
         position={"relative"}
         width={"100vw"}
         bg={"lightgreen"}
+        mb={"5"}
       >
         <Flex
           justifyContent='space-between' // Align the items in the center and push the button to the right
