@@ -10,6 +10,7 @@ import Navbar from "./Navbar";
 import { useState, useEffect } from "react";
 
 const ChatIndex = () => {
+  const [openSide, setOpenSide] = useState(false);
   return (
     <Grid
       h='100vh'
