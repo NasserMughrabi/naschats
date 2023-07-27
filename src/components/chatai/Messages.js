@@ -58,53 +58,48 @@ const Messages = () => {
   };
 
   return (
-    <Box
-      flex='1'
-      overflowY='auto' // Add this to make the container scrollable
-    >
-      <Flex flexDir={"column"} h='100%' w='100%' px={2} overflowY='scroll'>
-        {messages.map((message, index) => (
-          <Flex
-            key={index}
-            flexDir={"column"}
-            m='2'
-            // maxW={"70%"}
-            alignSelf={message.isUser ? "flex-end" : "flex-start"}
-            mb={"3"}
-            // mb={index === totalMessages - 1 ? "3" : "0"}
+    <Flex flexDir={"column"} h='100%' w='100%' px={2} overflowY='scroll'>
+      {messages.map((message, index) => (
+        <Flex
+          key={index}
+          flexDir={"column"}
+          m='2'
+          // maxW={"70%"}
+          alignSelf={message.isUser ? "flex-end" : "flex-start"}
+          mb={"3"}
+          // mb={index === totalMessages - 1 ? "3" : "0"}
+        >
+          <Text
+            fontSize='xs'
+            fontWeight='bold'
+            textAlign={message.isUser ? "right" : "left"}
+            color={"white"}
           >
-            <Text
-              fontSize='xs'
-              fontWeight='bold'
-              textAlign={message.isUser ? "right" : "left"}
-              color={"white"}
-            >
-              {message.isUser ? "You" : "Nas"}
-            </Text>
-            <Box
-              bg={message.isUser ? "black" : "white"}
-              color={message.isUser ? "white" : "black"}
-              p='2'
-              borderRadius='lg'
-              width={"fit-content"}
-              maxW={"100%"}
-              alignSelf={message.isUser ? "flex-end" : "flex-start"}
-              fontSize={"sm"}
-            >
-              {message.text}
-            </Box>
-            <Text
-              fontSize='xs'
-              color='gray.500'
-              mt='1'
-              textAlign={message.isUser ? "right" : "left"}
-            ></Text>
-          </Flex>
-        ))}
-        <Box flex='1' />
-        <AlwaysScrollToBottom />
-      </Flex>
-    </Box>
+            {message.isUser ? "You" : "Nas"}
+          </Text>
+          <Box
+            bg={message.isUser ? "black" : "white"}
+            color={message.isUser ? "white" : "black"}
+            p='2'
+            borderRadius='lg'
+            width={"fit-content"}
+            maxW={"100%"}
+            alignSelf={message.isUser ? "flex-end" : "flex-start"}
+            fontSize={"sm"}
+          >
+            {message.text}
+          </Box>
+          <Text
+            fontSize='xs'
+            color='gray.500'
+            mt='1'
+            textAlign={message.isUser ? "right" : "left"}
+          ></Text>
+        </Flex>
+      ))}
+      <Box flex='1' />
+      {/* <AlwaysScrollToBottom /> */}
+    </Flex>
   );
 };
 
