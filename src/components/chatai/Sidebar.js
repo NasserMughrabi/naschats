@@ -55,7 +55,6 @@ const Sidebar = ({ openSide, setUseCase }) => {
       pos={{ base: "fixed", md: "relative" }}
       zIndex={2}
       h='full'
-      // {...rest}
       display={{ base: `${baseDisplay}`, md: `${mdDisplay}` }}
     >
       <Flex h='20' alignItems='center' mx='8' justifyContent='space-between'>
