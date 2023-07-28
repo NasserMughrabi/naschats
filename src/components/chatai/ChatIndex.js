@@ -17,7 +17,7 @@ import definePrompt from "./definePrompt";
 
 const ChatIndex = () => {
   const [openSide, setOpenSide] = useState(false);
-  const [useCase, setUseCase] = useState('Youtube');
+  const [useCase, setUseCase] = useState(null);
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
