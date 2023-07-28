@@ -17,7 +17,7 @@ import definePrompt from "./definePrompt";
 
 const ChatIndex = () => {
   const [openSide, setOpenSide] = useState(false);
-  const [useCase, setUseCase] = useState(null);
+  const [useCase, setUseCase] = useState('Youtube');
   const [messages, setMessages] = useState([]);
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -157,7 +157,11 @@ const ChatIndex = () => {
       templateColumns='repeat(12, 1fr)'
     >
       <GridItem rowSpan={1} colSpan={12}>
-        <Navbar openSide={openSide} setOpenSide={setOpenSide} />
+        <Navbar
+          openSide={openSide}
+          setOpenSide={setOpenSide}
+          useCase={useCase}
+        />
       </GridItem>
       <GridItem rowSpan={11} colSpan={12} bg='#0f3c4c'>
         <Flex h={{ base: "86%", md: "100%" }} gridRow='span 11'>

@@ -10,7 +10,6 @@ import {
   Textarea,
   Skeleton,
 } from "@chakra-ui/react";
-import Footer from "./Footer";
 
 const Messages = ({messages, isLoading}) => {
 

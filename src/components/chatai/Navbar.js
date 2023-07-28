@@ -17,6 +17,7 @@ import {
   Image,
   Center,
   Avatar,
+  Spinner
 } from "@chakra-ui/react";
 import {
   HamburgerIcon,
@@ -26,10 +27,14 @@ import {
 } from "@chakra-ui/icons";
 import Logo from "../main/Logo";
 import { router } from "next/router";
+import { useState } from "react";
 
-const Navbar = ({ openSide, setOpenSide }) => {
+const Navbar = ({ openSide, setOpenSide, useCase }) => {
+  const [loading, setLoading] = useState(false);
   const handleLogout = async () => {
+    setLoading(true);
     await fetch("/api/auth/logout");
+    setLoading(true);
     router.push("/login");
   };
 
@@ -64,7 +69,9 @@ const Navbar = ({ openSide, setOpenSide }) => {
         />
       </Flex>
       <Flex flex={{ base: 1 }} justify={{ base: "center", md: "start" }}>
-        <Flex cursor={"pointer"}>Youtuber AI</Flex>
+        <Flex cursor={"pointer"} fontSize={"1.6rem"}>
+          {useCase} AI
+        </Flex>
       </Flex>
       <Stack
         flex={{ base: 1, md: 0 }}
@@ -72,21 +79,33 @@ const Navbar = ({ openSide, setOpenSide }) => {
         direction={"row"}
         spacing={6}
       >
-        <Button
-          as={"a"}
-          display={{ base: "inline-flex" }}
-          fontSize={"sm"}
-          fontWeight={600}
-          color={"white"}
-          bg={"pink.400"}
-          cursor={"pointer"}
-          _hover={{
-            bg: "pink.300",
-          }}
-          onClick={handleLogout}
-        >
-          Log out
-        </Button>
+        {loading ? (
+          <Flex justifyContent='center' alignItems='center' height='100%'>
+            <Spinner
+              thickness='4px'
+              speed='0.65s'
+              emptyColor='gray.200'
+              color='blue.500'
+              size='lg'
+            />
+          </Flex>
+        ) : (
+          <Button
+            as={"a"}
+            display={{ base: "inline-flex" }}
+            fontSize={"sm"}
+            fontWeight={600}
+            color={"white"}
+            bg={"pink.400"}
+            cursor={"pointer"}
+            _hover={{
+              bg: "pink.300",
+            }}
+            onClick={handleLogout}
+          >
+            Log out
+          </Button>
+        )}
       </Stack>
     </Flex>
   );
