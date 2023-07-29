@@ -10,7 +10,7 @@ import {
   useColorMode,
 } from "@chakra-ui/react";
 import { useEffect, useRef, useState } from "react";
-import MicIconButton from "./MicIconButton";
+import MicButton from "./MicButton";
 
 const Footer = ({ handleSend, handleInputChange }) => {
   const [value, setValue] = useState("");
@@ -54,7 +54,7 @@ const Footer = ({ handleSend, handleInputChange }) => {
           bottom={"0"}
           width={"100%"}
         >
-          <MicIconButton handleSend={handleSend} setValue={setValue}/>
+          <MicButton handleSend={handleSend} setValue={setValue}/>
           <Textarea
             ref={textareaRef}
             value={value}

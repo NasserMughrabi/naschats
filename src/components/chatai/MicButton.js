@@ -7,7 +7,7 @@ import SpeechRecognition, {
   useSpeechRecognition,
 } from "react-speech-recognition";
 
-const MicIconButton = ({ handleSend, setValue }) => {
+const MicButton = ({ handleSend, setValue }) => {
   const { transcript, listening, browserSupportsSpeechRecognition } =
     useSpeechRecognition();
 
@@ -39,4 +39,4 @@ const MicIconButton = ({ handleSend, setValue }) => {
   return null;
 };
 
-export default MicIconButton;
+export default MicButton;
