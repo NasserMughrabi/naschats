@@ -1,8 +1,18 @@
 import React from "react";
-import { Box, Flex, Input, Button, Textarea } from "@chakra-ui/react";
+import {
+  Box,
+  Flex,
+  Input,
+  Button,
+  Textarea,
+  IconButton,
+  css,
+  useColorMode,
+} from "@chakra-ui/react";
 import { useEffect, useRef, useState } from "react";
+import MicIconButton from "./MicIconButton";
 
-const Footer = ({handleSend, handleInputChange}) => {
+const Footer = ({ handleSend, handleInputChange }) => {
   const [value, setValue] = useState("");
   const textareaRef = useRef(null);
   useEffect(() => {
@@ -27,8 +37,6 @@ const Footer = ({handleSend, handleInputChange}) => {
     }
   }, [value]);
 
-
-
   return (
     <Flex px={"4"} paddingTop={"0px"} mt={"10"} alignItems='center'>
       <Box
@@ -46,6 +54,7 @@ const Footer = ({handleSend, handleInputChange}) => {
           bottom={"0"}
           width={"100%"}
         >
+          <MicIconButton handleSend={handleSend} setValue={setValue}/>
           <Textarea
             ref={textareaRef}
             value={value}
@@ -73,14 +82,14 @@ const Footer = ({handleSend, handleInputChange}) => {
           />
           <Button
             color='white'
-            borderRadius='none'
+            borderRadius='1px'
             _hover={{
-              bg: "pink.400",
-              color: "black",
+              bg: "teal.400",
               border: "1px solid white",
             }}
-            bg={"pink.400"}
+            colorScheme='teal'
             cursor={"pointer"}
+            ml={"0.2rem"}
             onClick={(e) => {
               handleSend();
               setValue("");

@@ -2,30 +2,33 @@ import { Message } from "./Messages";
 
 export default function definePrompt(input, promptMode, messages) {
   // get the last 10 messages if there are more than 10 messages
-  if (messages.length > 10) {
+  if (messages.length >= 10) {
     messages = messages.slice(-10);
   }
+  // You are an american from California who has personal opinions. Give an example of how would an american Californian would argue the below viewpoint or answer the question, disagree, support viewpoint with evidence, answer the user's questions when asked, and keep the conversation going. Example should be short and concise with COMPLETE SENTENCES.
   const basicInfo = `
+  
+    This is the past messages of the conversation between the user and the leadership coach: \n
+    ${messages.map((message) => {
+      return message.isUser
+        ? `User: ${message.text}\n`
+        : `AI: ${message.text}\n`;
+    })}
 
-    You are a helpful and empathetic coach that gives actionable advice and helps users achieve goals. \n
+    Analyze the user's input, user's input is: ${input}.\n
+    
+    If the input is a question, give an example answer from an american living in california. otherwise,
+    if the input is not a question, give an example disagreement supported with evidence. \n
 
-    Summarize the text delimited by triple quotes into a single sentence. This will be the context of the past conversation. \n
-      """
-      This is the past conversation between the user and the leadership coach: \n
-      ${messages.map((message) => {
-        return message.isUser
-          ? `User: ${message.text}\n`
-          : `Coach: ${message.text}\n`;
-      })}
-      """ \n
-
-    Analyze the user's input and the conversation. Do not repeat on what the conversation has already covered. \n
-    Please ask one follow up question to better understand the situation if needed or ask one powerful question to help users generate insights, or give a suggestion based on the User's input. \n
-    The most recent user's input is: ${input}.\n
-
-    The following is the specific task you need to do: \n
-
-  `;
+    ${
+      messages.length % 4 === 0
+        ? `Please ask one follow up question to better understand the user's viewpont and to keep the conversation going.\n`
+        : ``
+    } 
+      
+      Give the example only without any extra info, don't use the dialog format, and use COMPLETE SENTENCES.
+      
+      `;
 
   switch (promptMode) {
     case "video":
@@ -87,9 +90,25 @@ export default function definePrompt(input, promptMode, messages) {
     default:
       return `
         ${basicInfo}
-          If the input is talking about user's feeling or emotion, please ask the user to elaborate more like "What makes you feel that way?" or "What's the reason behind that?". \n
-          Prioritize the response based on the user's input, then the conversation and the user's information(goals, challenges). \n
-          Answer the user's question or give suggestion below directly. Don't use the dialog format and answer in plain text only. Response should be short and concise with COMPLETE SENTENCES. 
+          
       `;
   }
 }
+
+// If the input is talking about user's feeling or emotion, please ask the user to elaborate more like "What makes you feel that way?" or "What's the reason behind that?". \n
+// Prioritize the response based on the user's input, then the conversation and the user's information(goals, challenges). \n
+// Answer the user's question or give suggestion below directly. Don't use the dialog format and answer in plain text only. Response should be short and concise with COMPLETE SENTENCES.
+
+// You are a helpful and empathetic coach that gives actionable advice and helps users achieve goals. \n
+
+// Summarize the text delimited by triple quotes into a single sentence. This will be the context of the past conversation. \n
+//   """
+//   This is the past conversation between the user and the leadership coach: \n
+//   ${messages.map((message) => {
+//     return message.isUser
+//       ? `User: ${message.text}\n`
+//       : `Coach: ${message.text}\n`;
+//   })}
+//   """ \n
+
+//  Please ask one follow up question to better understand the situation if needed or ask one powerful question to help users generate insights, or give a suggestion based on the User's input. \n

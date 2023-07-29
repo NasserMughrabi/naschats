@@ -3,6 +3,8 @@ import React from "react";
 import { ChakraProvider, CSSReset } from "@chakra-ui/react";
 import { AuthContextProvider } from "../context/AuthContext";
 import '../static/scrollbar.css'; 
+import "../static/microphone.css"
+
 
 
 function MyApp({ Component, pageProps }: AppProps) {

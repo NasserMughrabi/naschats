@@ -111,7 +111,7 @@ const ChatIndex = () => {
         } else {
           const preloadQuestions = [
             {
-              text: "Hi, I am Nas, your AI coach. 🙂",
+              text: "Hi, I am Nas, your AI debater.",
               uId: uid,
               timestamp: await fetcher("/api/time").then(
                 (res) => res.serverTime

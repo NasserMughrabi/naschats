@@ -96,7 +96,7 @@ const Navbar = ({ openSide, setOpenSide, useCase }) => {
             fontSize={"sm"}
             fontWeight={600}
             color={"white"}
-            bg={"pink.400"}
+            colorScheme='teal'
             cursor={"pointer"}
             _hover={{
               bg: "pink.300",
