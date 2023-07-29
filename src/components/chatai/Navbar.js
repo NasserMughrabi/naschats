@@ -61,8 +61,8 @@ const Navbar = ({ openSide, setOpenSide, useCase }) => {
           icon={
             openSide ? <CloseIcon w={3} h={3} /> : <HamburgerIcon w={5} h={5} />
           }
-          _hover={{ bg: "pink.300" }}
-          bg={"pink.400"}
+          _hover={{ bg: "teal.400" }}
+          bg='teal'
           variant={"ghost"}
           aria-label={"Toggle Navigation"}
           color={"white"}

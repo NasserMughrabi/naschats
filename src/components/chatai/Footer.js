@@ -59,8 +59,8 @@ const Footer = ({ handleSend, handleInputChange }) => {
             ref={textareaRef}
             value={value}
             bg='#01212E'
-            placeholder='Type Something...'
-            _placeholder={{ color: "white" }}
+            placeholder='Send a message'
+            _placeholder={{ color: "grey" }}
             color={"white"}
             minHeight={10}
             maxHeight={200}
