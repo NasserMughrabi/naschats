@@ -30,8 +30,8 @@ export default async function handler(
               Authorization: `Bearer ${apiKey}`
             },
             body: JSON.stringify({
-              messages: [{ role: "user", content: prompt }],
-              temperature: 0.4,
+              messages: [{role: "user", content: prompt}],
+              temperature: 0.1,
               max_tokens: 120,
               n: 1,
               model: "gpt-4",

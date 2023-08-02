@@ -8,7 +8,7 @@ export default function definePrompt(input, promptMode, messages) {
   // You are an american from California who has personal opinions. Give an example of how would an american Californian would argue the below viewpoint or answer the question, disagree, support viewpoint with evidence, answer the user's questions when asked, and keep the conversation going. Example should be short and concise with COMPLETE SENTENCES.
   const basicInfo = `
   
-    This is the past messages of the conversation between the user and the leadership coach: \n
+    This is the past messages of the conversation between you and the user: \n
     ${messages.map((message) => {
       return message.isUser
         ? `User: ${message.text}\n`
@@ -26,7 +26,7 @@ export default function definePrompt(input, promptMode, messages) {
         : ``
     } 
       
-      Give the example only without any extra info, don't use the dialog format, and use COMPLETE SENTENCES.
+      GIVE THE EXAMPLE ONLY without any extra info, don't use the dialog format, and use COMPLETE SENTENCES.
       
       `;
 
