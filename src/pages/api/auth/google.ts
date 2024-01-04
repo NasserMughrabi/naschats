@@ -9,7 +9,8 @@ export default async function handler(
   res: NextApiResponse
 ) {
 
-  const user = JSON.parse(req.body);
+  var user = req.body;
+  var user = user.user
   const fullName = user.displayName;
   const [firstName, lastName] = splitNameByFirstSpace(fullName);
 
@@ -21,14 +22,13 @@ export default async function handler(
       created_at: Timestamp.now().toMillis(),
     });
 
-    // console.log('Setting cookies')
     res.setHeader(
       "set-cookie",
       `uid=${user.uid}; Max-Age=${1000 * 60 * 24 * 14};Path=/; HttpOnly`
     );
-
     return res.status(200).json({ uid: user.uid });
   } catch (e) {
+    console.log("now", e)
     return res.status(500).json({ error: "error setDoc in the firestore" });
   }
 }

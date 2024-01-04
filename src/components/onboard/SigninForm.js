@@ -28,14 +28,19 @@ import { useToast } from "@chakra-ui/react";
 import router from "next/router";
 import { UserAuth } from "@/context/AuthContext";
 import { useEffect } from "react";
-import { getRedirectResult, GoogleAuthProvider } from "firebase/auth";
+import {
+  getAuth,
+  signInWithPopup,
+  GoogleAuthProvider,
+  getRedirectResult,
+} from "firebase/auth";
 import { auth } from "../../../firebaseConfig";
 
 const Signin = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const toast = useToast();
-  const { user, googleSignIn } = UserAuth();
+  const { user, setUser, googleSignIn } = UserAuth();
   const [loading, setLoading] = useState(false);
 
   const isValidEmail = (email) => {
@@ -115,11 +120,46 @@ const Signin = () => {
   };
 
   const handleGoogleSignin = async () => {
-    setLoading(true);
     try {
-      await googleSignIn();
+      const auth = getAuth();
+      const provider = new GoogleAuthProvider();
+      const result = await signInWithPopup(auth, provider);
+      const user = result.user
+      fetch("/api/auth/google", {
+        method: "POST",
+        body: JSON.stringify({ user }),
+        headers: {
+          "content-type": "application/json",
+        },
+      })
+        .then((response) => {
+          if (response.ok) {
+            router.push("/chat");
+            return response.json();
+          }
+          toast({
+            title: "Attention",
+            description: `${result.user.displayName} IN`,
+            status: "success",
+            duration: 3000,
+            isClosable: true,
+            position: "top",
+          });
+          setLoading(false);
+          throw new Error(message);
+        })
+        .catch((e) => {
+          console.log(e);
+        });
     } catch (error) {
-      console.log(error);
+      toast({
+        title: "Attention",
+        description: `${error}`,
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+        position: "top",
+      });
     }
   };
 
