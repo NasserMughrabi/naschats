@@ -21,7 +21,8 @@ const Trader = () => {
       justifyContent={"center"}
       alignItems={"center"}
     >
-      Talk to trader, No docs
+      <Text fontSize={{base:"2rem", md: "4rem"}}>Talk to a trained trader</Text>
+      <Button colorScheme="teal" w={"8rem"}>Start Chat</Button>
     </Flex>
   );
 };

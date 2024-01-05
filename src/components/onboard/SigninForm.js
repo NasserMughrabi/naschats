@@ -28,19 +28,13 @@ import { useToast } from "@chakra-ui/react";
 import router from "next/router";
 import { UserAuth } from "@/context/AuthContext";
 import { useEffect } from "react";
-import {
-  getAuth,
-  signInWithPopup,
-  GoogleAuthProvider,
-  getRedirectResult,
-} from "firebase/auth";
-import { auth } from "../../../firebaseConfig";
+import { GoogleSignin, redirect } from "./GoogleSignin";
 
 const Signin = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const toast = useToast();
-  const { user, setUser, googleSignIn } = UserAuth();
+  const { user } = UserAuth();
   const [loading, setLoading] = useState(false);
 
   const isValidEmail = (email) => {
@@ -121,36 +115,7 @@ const Signin = () => {
 
   const handleGoogleSignin = async () => {
     try {
-      const auth = getAuth();
-      const provider = new GoogleAuthProvider();
-      const result = await signInWithPopup(auth, provider);
-      const user = result.user
-      fetch("/api/auth/google", {
-        method: "POST",
-        body: JSON.stringify({ user }),
-        headers: {
-          "content-type": "application/json",
-        },
-      })
-        .then((response) => {
-          if (response.ok) {
-            router.push("/chat");
-            return response.json();
-          }
-          toast({
-            title: "Attention",
-            description: `${result.user.displayName} IN`,
-            status: "success",
-            duration: 3000,
-            isClosable: true,
-            position: "top",
-          });
-          setLoading(false);
-          throw new Error(message);
-        })
-        .catch((e) => {
-          console.log(e);
-        });
+      await GoogleSignin();
     } catch (error) {
       toast({
         title: "Attention",
@@ -163,64 +128,39 @@ const Signin = () => {
     }
   };
 
-  useEffect(() => {
-    // const auth = getAuth();
-    getRedirectResult(auth).then(async (userCred) => {
-      if (!userCred) {
-        return;
-      }
-
-      setLoading(true);
-
-      fetch("/api/auth/google", {
-        method: "POST",
-        body: JSON.stringify(userCred.user),
-      })
-        .then((response) => {
-          if (response.ok) {
-            router.push("/chat");
-          }
-          setLoading(false);
-        })
-        .catch((error) => {
-          console.log("here", error.message);
-        });
-    });
-  }, []);
-
   if (loading) {
     return (
-      <Flex justifyContent='center' alignItems='center' height='100%'>
-          <Spinner
-            thickness='4px'
-            speed='0.65s'
-            emptyColor='gray.200'
-            color='blue.500'
-            size='xl'
-          />
+      <Flex justifyContent="center" alignItems="center" height="100%">
+        <Spinner
+          thickness="4px"
+          speed="0.65s"
+          emptyColor="gray.200"
+          color="blue.500"
+          size="xl"
+        />
       </Flex>
     );
   }
 
   return (
-    <Flex justifyContent='center' alignItems='center' height='100%'>
+    <Flex justifyContent="center" alignItems="center" height="100%">
       <Container
-        justifyContent='center'
-        alignItems='center'
+        justifyContent="center"
+        alignItems="center"
         fontFamily={"Spline Sans Variable,-apple-system,system-ui,sans-serif"}
-        maxW='lg'
+        maxW="lg"
         py={{ base: "12", md: "2" }}
         px={{ base: "0", sm: "8" }}
       >
-        <Stack spacing='8'>
-          <Stack spacing='6'>
-            <Stack spacing={{ base: "2", md: "3" }} textAlign='center'>
+        <Stack spacing="8">
+          <Stack spacing="6">
+            <Stack spacing={{ base: "2", md: "3" }} textAlign="center">
               <Heading fontSize={{ base: "2xl", md: "3xl" }}>
                 Log in to your account
               </Heading>
-              <Text color='grey'>
+              <Text color="grey">
                 Dont have an account?{" "}
-                <Link color='teal' href='/signup'>
+                <Link color="teal" href="/signup">
                   Sign up
                 </Link>
               </Text>
@@ -233,13 +173,13 @@ const Signin = () => {
             boxShadow={{ base: "none", sm: "md" }}
             borderRadius={{ base: "none", sm: "xl" }}
           >
-            <Stack spacing='6'>
-              <Stack spacing='5'>
+            <Stack spacing="6">
+              <Stack spacing="5">
                 <FormControl>
-                  <FormLabel htmlFor='email'>Email</FormLabel>
+                  <FormLabel htmlFor="email">Email</FormLabel>
                   <Input
-                    id='email'
-                    type='email'
+                    id="email"
+                    type="email"
                     _focus={{
                       border: "1px solid #319795",
                       zIndex: "1",
@@ -249,32 +189,38 @@ const Signin = () => {
                   />
                 </FormControl>
                 <PasswordField
-                  name='Password'
+                  name="Password"
                   isSignup={false}
                   setPassword={setPassword}
                 />
               </Stack>
-              <HStack justify='space-between'>
-                <Checkbox defaultChecked colorScheme='teal'>
+              <HStack justify="space-between">
+                <Checkbox defaultChecked colorScheme="teal">
                   Remember me
                 </Checkbox>
-                <Button paddingRight={0} color='teal' variant='text' size='sm' onClick={() => router.push("/forgotPassword")}>
+                <Button
+                  paddingRight={0}
+                  color="teal"
+                  variant="text"
+                  size="sm"
+                  onClick={() => router.push("/forgotPassword")}
+                >
                   Forgot password?
                 </Button>
               </HStack>
-              <Stack spacing='6'>
-                <Button colorScheme='teal' onClick={handleSignin}>
+              <Stack spacing="6">
+                <Button colorScheme="teal" onClick={handleSignin}>
                   Sign in
                 </Button>
                 <HStack>
                   <Divider />
-                  <Text textStyle='sm' whiteSpace='nowrap' color='fg.muted'>
+                  <Text textStyle="sm" whiteSpace="nowrap" color="fg.muted">
                     OR
                   </Text>
                   <Divider />
                 </HStack>
                 <Button
-                  bg='white'
+                  bg="white"
                   w={"full"}
                   maxW={"md"}
                   variant={"outline"}

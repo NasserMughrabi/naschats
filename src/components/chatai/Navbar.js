@@ -17,7 +17,11 @@ import {
   Image,
   Center,
   Avatar,
-  Spinner
+  Spinner,
+  Menu,
+  MenuList,
+  MenuItem,
+  MenuButton,
 } from "@chakra-ui/react";
 import {
   HamburgerIcon,
@@ -28,9 +32,11 @@ import {
 import Logo from "../main/Logo";
 import { router } from "next/router";
 import { useState } from "react";
+import { UserAuth } from "@/context/AuthContext";
 
 const Navbar = ({ openSide, setOpenSide, useCase }) => {
   const [loading, setLoading] = useState(false);
+  const { user } = UserAuth();
   const handleLogout = async () => {
     setLoading(true);
     await fetch("/api/auth/logout");
@@ -48,13 +54,15 @@ const Navbar = ({ openSide, setOpenSide, useCase }) => {
       borderStyle={"solid"}
       borderColor={useColorModeValue("gray.200", "gray.900")}
       align={"center"}
-      h='100%'
-      gridRow='span 1'
+      h="100%"
+      gridRow="span 1"
     >
       <Flex
         flex={{ base: 1, md: "auto" }}
         ml={{ base: -2 }}
         display={{ base: "flex", md: "none" }}
+        alignItems={"center"}
+        justifyContent={"space-between"}
       >
         <IconButton
           onClick={() => setOpenSide(!openSide)}
@@ -62,7 +70,7 @@ const Navbar = ({ openSide, setOpenSide, useCase }) => {
             openSide ? <CloseIcon w={3} h={3} /> : <HamburgerIcon w={5} h={5} />
           }
           _hover={{ bg: "teal.400" }}
-          bg='teal'
+          bg="teal"
           variant={"ghost"}
           aria-label={"Toggle Navigation"}
           color={"white"}
@@ -80,31 +88,56 @@ const Navbar = ({ openSide, setOpenSide, useCase }) => {
         spacing={6}
       >
         {loading ? (
-          <Flex justifyContent='center' alignItems='center' height='100%'>
+          <Flex justifyContent="center" alignItems="center" height="100%">
             <Spinner
-              thickness='4px'
-              speed='0.65s'
-              emptyColor='gray.200'
-              color='blue.500'
-              size='lg'
+              thickness="4px"
+              speed="0.65s"
+              emptyColor="gray.200"
+              color="blue.500"
+              size="lg"
             />
           </Flex>
         ) : (
-          <Button
-            as={"a"}
-            display={{ base: "inline-flex" }}
-            fontSize={"sm"}
-            fontWeight={600}
-            color={"white"}
-            colorScheme='teal'
-            cursor={"pointer"}
-            _hover={{
-              bg: "pink.300",
-            }}
-            onClick={handleLogout}
-          >
-            Log out
-          </Button>
+          <Flex alignItems={"center"} bg={"black"}>
+            <Menu bg={"black"}>
+              <MenuButton
+                as={Button}
+                rounded={"full"}
+                variant={"link"}
+                cursor={"pointer"}
+                minW={0}
+              >
+                <Avatar size={"sm"} src={user && `${user.photoURL}`} />
+              </MenuButton>
+              <MenuList>
+                <MenuItem>
+                  <Text color={"black"}>{user?.displayName}</Text>
+                </MenuItem>
+                <MenuItem>
+                  {/* <Link
+                    color={"black"}
+                    variant='access'
+                    onClick={handleLogout}
+                  >
+                    Log Out
+                  </Link> */}
+                  <Button
+                    as={"a"}
+                    display={{ base: "inline-flex" }}
+                    fontSize={"sm"}
+                    fontWeight={600}
+                    color={"white"}
+                    colorScheme="teal"
+                    cursor={"pointer"}
+                    onClick={handleLogout}
+                    w={"100%"}
+                  >
+                    Log out
+                  </Button>
+                </MenuItem>
+              </MenuList>
+            </Menu>
+          </Flex>
         )}
       </Stack>
     </Flex>

@@ -23,10 +23,10 @@ import { FcGoogle } from "react-icons/fc";
 import { useToast } from "@chakra-ui/react";
 import { UserAuth } from "@/context/AuthContext";
 import {router} from "next/router";
+import {GoogleSignin, redirect} from "./GoogleSignin"
 
 const Signup = (props) => {
   const { formData, setFormData, step, setStep } = props;
-  const { googleSignIn } = UserAuth();
   const toast = useToast();
 
   const isValidEmail = (email) => {
@@ -83,47 +83,7 @@ const Signup = (props) => {
   }
 
   const handleGoogleSignin = async () => {
-    try {
-      const auth = getAuth();
-      const provider = new GoogleAuthProvider();
-      const result = await signInWithPopup(auth, provider);
-      const user = result.user
-      fetch("/api/auth/google", {
-        method: "POST",
-        body: JSON.stringify({ user }),
-        headers: {
-          "content-type": "application/json",
-        },
-      })
-        .then((response) => {
-          if (response.ok) {
-            router.push("/chat");
-            return response.json();
-          }
-          toast({
-            title: "Attention",
-            description: `${result.user.displayName} IN`,
-            status: "success",
-            duration: 3000,
-            isClosable: true,
-            position: "top",
-          });
-          setLoading(false);
-          throw new Error(message);
-        })
-        .catch((e) => {
-          console.log(e);
-        });
-    } catch (error) {
-      toast({
-        title: "Attention",
-        description: `${error}`,
-        status: "error",
-        duration: 3000,
-        isClosable: true,
-        position: "top",
-      });
-    }
+    await GoogleSignin();
   };
 
   return (

@@ -1,4 +1,4 @@
-import React from 'react'
+import React from "react";
 import {
   Avatar,
   Flex,
@@ -12,21 +12,22 @@ import {
 
 const Youtube = () => {
   return (
-    <Flex
+    <VStack
       flexDir={"column"}
-      h='100%'
-      w='100%'
-      color={'white'}
-      fontSize={'4rem'}
-      justifyContent={'center'}
-      alignItems={'center'}
+      h="100%"
+      w="100%"
+      color={"white"}
+      fontSize={"4rem"}
+      justifyContent={"center"}
+      alignItems={"center"}
     >
-        Upload A Youtube Video
-    </Flex>
+      <Text fontSize={{base:"2rem", md: "4rem"}}>Paste Youtube Video URL</Text>
+      <VStack w={"100%"} px={2} justifyContent={"center"} alignItems={"center"}>
+        <Input></Input>
+        <Button colorScheme="teal" w={"8rem"}>Start Chat</Button>
+      </VStack>
+    </VStack>
   );
-}
+};
 
-export default Youtube
-
-
-
+export default Youtube;

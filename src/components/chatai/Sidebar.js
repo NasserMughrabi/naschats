@@ -29,8 +29,8 @@ import { ReactText } from "react";
 import { useState } from "react";
 
 const LinkItems = [
-  { name: "Youtube", icon: FiHome },
   { name: "Tutor", icon: FiCompass },
+  { name: "Youtube", icon: FiHome },
   { name: "Lawyer", icon: FiStar },
   { name: "Trader", icon: FiTrendingUp },
   { name: "Doctor", icon: FiSettings },
@@ -44,7 +44,7 @@ const Sidebar = ({ openSide, setUseCase }) => {
     mdDisplay = "none";
   }
 
-  const [selectedItem, setSelectedItem] = useState(null);
+  const [selectedItem, setSelectedItem] = useState("Tutor");
 
   return (
     <Box
@@ -63,7 +63,7 @@ const Sidebar = ({ openSide, setUseCase }) => {
           alt='logo 2'
           w={{ base: "100px", md: "150px", lg: "145px" }}
           cursor={"pointer"}
-          onClick={() => setUseCase("null")}
+          onClick={() => {setUseCase("Tutor"); setSelectedItem("Tutor")}}
         />
       </Flex>
       {LinkItems.map((link) => (
@@ -72,8 +72,8 @@ const Sidebar = ({ openSide, setUseCase }) => {
           icon={link.icon}
           value={link.name}
           setUseCase={setUseCase}
-          selected={selectedItem === link.name}
-          onClick={() => setSelectedItem(link.name)}
+          selectedItem={selectedItem}
+          setSelectedItem={setSelectedItem}
         >
           {link.name}
         </NavItem>
@@ -82,9 +82,10 @@ const Sidebar = ({ openSide, setUseCase }) => {
   );
 };
 
-const NavItem = ({ icon, children, value, setUseCase, selected, ...rest }) => {
+const NavItem = ({ icon, children, value, setUseCase, selectedItem, setSelectedItem, ...rest }) => {
   const handleUseCase = (value) => {
     setUseCase(value);
+    setSelectedItem(value)
   };
 
   return (
@@ -102,7 +103,7 @@ const NavItem = ({ icon, children, value, setUseCase, selected, ...rest }) => {
         role='group'
         cursor='pointer'
         color={"white"}
-        bg={selected ? "cyan.400" : "transparent"}
+        bg={selectedItem === value ? "cyan.400" : "transparent"}
         _hover={{
           bg: "cyan.400",
           color: "white",

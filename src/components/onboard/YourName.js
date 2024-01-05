@@ -17,17 +17,17 @@ import {
   Stack,
   Text,
   Flex,
-  Spinner
+  Spinner,
 } from "@chakra-ui/react";
 import { FcGoogle } from "react-icons/fc";
 import router from "next/router";
 import { useToast } from "@chakra-ui/react";
 import { UserAuth } from "@/context/AuthContext";
 import { useState } from "react";
+import {GoogleSignin, redirect} from "./GoogleSignin"
 
 const YourName = (props) => {
   const { formData, setFormData, step, setStep } = props;
-  const { googleSignIn } = UserAuth();
   const toast = useToast();
   const [loading, setLoading] = useState(false);
 
@@ -68,83 +68,43 @@ const YourName = (props) => {
       .catch((e) => {
         console.log(e);
       });
-    }
+  };
 
-    const handleGoogleSignin = async () => {
-      try {
-        const auth = getAuth();
-        const provider = new GoogleAuthProvider();
-        const result = await signInWithPopup(auth, provider);
-        const user = result.user
-        fetch("/api/auth/google", {
-          method: "POST",
-          body: JSON.stringify({ user }),
-          headers: {
-            "content-type": "application/json",
-          },
-        })
-          .then((response) => {
-            if (response.ok) {
-              router.push("/chat");
-              return response.json();
-            }
-            toast({
-              title: "Attention",
-              description: `${result.user.displayName} IN`,
-              status: "success",
-              duration: 3000,
-              isClosable: true,
-              position: "top",
-            });
-            setLoading(false);
-            throw new Error(message);
-          })
-          .catch((e) => {
-            console.log(e);
-          });
-      } catch (error) {
-        toast({
-          title: "Attention",
-          description: `${error}`,
-          status: "error",
-          duration: 3000,
-          isClosable: true,
-          position: "top",
-        });
-      }
-    };
+  const handleGoogleSignin = async () => {
+    await GoogleSignin();
+  };
 
   if (loading) {
     return (
-      <Flex justifyContent='center' alignItems='center' height='100%'>
+      <Flex justifyContent="center" alignItems="center" height="100%">
         <Spinner
-          thickness='4px'
-          speed='0.65s'
-          emptyColor='gray.200'
-          color='blue.500'
-          size='xl'
+          thickness="4px"
+          speed="0.65s"
+          emptyColor="gray.200"
+          color="blue.500"
+          size="xl"
         />
       </Flex>
     );
   }
 
   return (
-    <Flex justifyContent='center' alignItems='center' height='100%'>
+    <Flex justifyContent="center" alignItems="center" height="100%">
       <Container
-        justifyContent='center'
-        alignItems='center'
+        justifyContent="center"
+        alignItems="center"
         fontFamily={"Spline Sans Variable,-apple-system,system-ui,sans-serif"}
-        maxW='lg'
+        maxW="lg"
         py={{ base: "12", md: "2" }}
         px={{ base: "0", sm: "8" }}
       >
-        <Stack spacing='8'>
-          <Stack spacing='6'>
-            <Stack spacing={{ base: "2", md: "3" }} textAlign='center'>
+        <Stack spacing="8">
+          <Stack spacing="6">
+            <Stack spacing={{ base: "2", md: "3" }} textAlign="center">
               <Heading fontSize={{ base: "2xl", md: "3xl" }}>Sign Up</Heading>
-              <Text color='grey'>
+              <Text color="grey">
                 Have an account?{" "}
-                <Link color='teal' href='/login'>
+                <Link color="teal" href="/login">
                   Sign in
                 </Link>
               </Text>
@@ -156,16 +116,16 @@ const YourName = (props) => {
             bg={{ base: "transparent", sm: "bg.surface" }}
             boxShadow={{ base: "none", sm: "md" }}
             borderRadius={{ base: "none", sm: "xl" }}
-            transition='transform 0.6s'
+            transition="transform 0.6s"
           >
-            <Stack spacing='6'>
-              <Stack spacing='5'>
+            <Stack spacing="6">
+              <Stack spacing="5">
                 <FormControl>
-                  <FormLabel htmlFor='firstName'>First Name</FormLabel>
+                  <FormLabel htmlFor="firstName">First Name</FormLabel>
                   <Input
-                    id='firstName'
+                    id="firstName"
                     value={formData.firstName}
-                    type='text'
+                    type="text"
                     _focus={{
                       border: "1px solid #319795",
                       zIndex: "1",
@@ -177,11 +137,11 @@ const YourName = (props) => {
                   />
                 </FormControl>
                 <FormControl>
-                  <FormLabel htmlFor='lastName'>Last Name</FormLabel>
+                  <FormLabel htmlFor="lastName">Last Name</FormLabel>
                   <Input
-                    id='lastName'
+                    id="lastName"
                     value={formData.lastName}
-                    type='text'
+                    type="text"
                     _focus={{
                       border: "1px solid #319795",
                       zIndex: "1",
@@ -194,24 +154,24 @@ const YourName = (props) => {
                 </FormControl>
               </Stack>
               <HStack>
-                <Button colorScheme='teal' flex={1} onClick={() => setStep(0)}>
+                <Button colorScheme="teal" flex={1} onClick={() => setStep(0)}>
                   Back
                 </Button>
-                <Button colorScheme='teal' flex={1} onClick={handleCreate}>
+                <Button colorScheme="teal" flex={1} onClick={handleCreate}>
                   Create
                 </Button>
               </HStack>
-              <Stack spacing='6'>
+              <Stack spacing="6">
                 <HStack>
                   <Divider />
-                  <Text textStyle='sm' whiteSpace='nowrap' color='fg.muted'>
+                  <Text textStyle="sm" whiteSpace="nowrap" color="fg.muted">
                     OR
                   </Text>
                   <Divider />
                 </HStack>
                 {/* <OAuthButtonGroup /> */}
                 <Button
-                  bg='white'
+                  bg="white"
                   w={"full"}
                   maxW={"md"}
                   variant={"outline"}
