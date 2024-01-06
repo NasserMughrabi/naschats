@@ -24,7 +24,7 @@ import router from "next/router";
 import { useToast } from "@chakra-ui/react";
 import { UserAuth } from "@/context/AuthContext";
 import { useState } from "react";
-import {GoogleSignin, redirect} from "./GoogleSignin"
+import { GoogleSignin, redirect } from "./GoogleSignin";
 
 const YourName = (props) => {
   const { formData, setFormData, step, setStep } = props;
@@ -72,6 +72,11 @@ const YourName = (props) => {
 
   const handleGoogleSignin = async () => {
     await GoogleSignin();
+    // load and wait 3 secs in case verification takes a sec
+    setLoading(true);
+    setTimeout(function () {
+      setLoading(false);
+    }, 3000);
   };
 
   if (loading) {

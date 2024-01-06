@@ -84,6 +84,11 @@ const Signup = (props) => {
 
   const handleGoogleSignin = async () => {
     await GoogleSignin();
+    // load and wait 3 secs in case verification takes a sec
+    setLoading(true);
+    setTimeout(function () {
+      setLoading(false);
+    }, 3000);
   };
 
   return (

@@ -114,18 +114,12 @@ const Signin = () => {
   };
 
   const handleGoogleSignin = async () => {
-    try {
-      await GoogleSignin();
-    } catch (error) {
-      toast({
-        title: "Attention",
-        description: `${error}`,
-        status: "error",
-        duration: 3000,
-        isClosable: true,
-        position: "top",
-      });
-    }
+    await GoogleSignin();
+    // load and wait 3 secs in case verification takes a sec
+    setLoading(true);
+    setTimeout(function () {
+      setLoading(false);
+    }, 3000);
   };
 
   if (loading) {
