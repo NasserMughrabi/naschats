@@ -29,6 +29,7 @@ import { ReactText } from "react";
 import { useState } from "react";
 
 const LinkItems = [
+  { name: "Debater", icon: FiCompass },
   { name: "Tutor", icon: FiCompass },
   { name: "Youtube", icon: FiHome },
   { name: "Lawyer", icon: FiStar },
@@ -44,26 +45,29 @@ const Sidebar = ({ openSide, setUseCase }) => {
     mdDisplay = "none";
   }
 
-  const [selectedItem, setSelectedItem] = useState("Tutor");
+  const [selectedItem, setSelectedItem] = useState("Debater");
 
   return (
     <Box
       bg={useColorModeValue("#01212E", "gray.900")}
-      borderRight='1px'
+      borderRight="1px"
       borderRightColor={useColorModeValue("gray.200", "gray.700")}
       minW={{ base: "15rem", md: "16.5rem" }}
       pos={{ base: "fixed", md: "relative" }}
       zIndex={2}
-      h='full'
+      h="full"
       display={{ base: `${baseDisplay}`, md: `${mdDisplay}` }}
     >
-      <Flex h='20' alignItems='center' mx='8' justifyContent='space-between'>
+      <Flex h="20" alignItems="center" mx="8" justifyContent="space-between">
         <Image
-          src='/logo8.svg'
-          alt='logo 2'
+          src="/logo8.svg"
+          alt="logo 2"
           w={{ base: "100px", md: "150px", lg: "145px" }}
           cursor={"pointer"}
-          onClick={() => {setUseCase("Tutor"); setSelectedItem("Tutor")}}
+          onClick={() => {
+            setUseCase("Tutor");
+            setSelectedItem("Tutor");
+          }}
         />
       </Flex>
       {LinkItems.map((link) => (
@@ -82,26 +86,35 @@ const Sidebar = ({ openSide, setUseCase }) => {
   );
 };
 
-const NavItem = ({ icon, children, value, setUseCase, selectedItem, setSelectedItem, ...rest }) => {
+const NavItem = ({
+  icon,
+  children,
+  value,
+  setUseCase,
+  selectedItem,
+  setSelectedItem,
+  ...rest
+}) => {
   const handleUseCase = (value) => {
     setUseCase(value);
-    setSelectedItem(value)
+    setSelectedItem(value);
   };
 
   return (
     <Box
-      as='a'
+      as="a"
       // href='#'
       style={{ textDecoration: "none" }}
       _focus={{ boxShadow: "none" }}
     >
       <Flex
-        align='center'
-        p='4'
-        mx='4'
-        borderRadius='lg'
-        role='group'
-        cursor='pointer'
+        align="center"
+        p="4"
+        mx="4"
+        mt={1}
+        borderRadius="lg"
+        role="group"
+        cursor="pointer"
         color={"white"}
         bg={selectedItem === value ? "cyan.400" : "transparent"}
         _hover={{
@@ -113,8 +126,8 @@ const NavItem = ({ icon, children, value, setUseCase, selectedItem, setSelectedI
       >
         {icon && (
           <Icon
-            mr='4'
-            fontSize='16'
+            mr="4"
+            fontSize="16"
             _groupHover={{
               color: "white",
             }}

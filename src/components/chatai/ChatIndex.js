@@ -152,9 +152,9 @@ const ChatIndex = () => {
 
   return (
     <Grid
-      h='100vh'
-      templateRows='repeat(12, 1fr)'
-      templateColumns='repeat(12, 1fr)'
+      h="100vh"
+      templateRows="repeat(12, 1fr)"
+      templateColumns="repeat(12, 1fr)"
     >
       <GridItem rowSpan={1} colSpan={12}>
         <Navbar
@@ -163,10 +163,19 @@ const ChatIndex = () => {
           useCase={useCase}
         />
       </GridItem>
-      <GridItem rowSpan={11} colSpan={12} bg='#0f3c4c'>
-        <Flex h={{ base: "86%", md: "100%" }} gridRow='span 11'>
+      <GridItem rowSpan={11} colSpan={12} bg="#0f3c4c">
+        <Flex h={{ base: "86%", md: "100%" }} gridRow="span 11">
           <Sidebar openSide={openSide} setUseCase={setUseCase} />
-          {useCase && useCase.toLowerCase() === "youtube" ? (
+          {useCase && useCase.toLowerCase() === "debater" ? (
+            <Flex flexDir={"column"} w={"100vw"}>
+              <Messages messages={messages} isLoading={isLoading} />
+              <Footer
+                handleSend={handleSend}
+                handleInputChange={handleInputChange}
+                setInput={setInput}
+              />
+            </Flex>
+          ) : useCase && useCase.toLowerCase() === "youtube" ? (
             <Flex flexDir={"column"} w={"100vw"}>
               <Youtube />
             </Flex>
